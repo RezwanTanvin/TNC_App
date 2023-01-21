@@ -44,7 +44,46 @@ public class LoginActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.password);
         loginButton = findViewById(R.id.login);
         loadingProgressBar = findViewById(R.id.loading);
+
         loginButton.setEnabled(false);
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadingProgressBar.setVisibility(View.VISIBLE);
+                String username = usernameEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+
+                mAuth.signInWithEmailAndPassword(username,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+
+                            loadingProgressBar.setVisibility(View.GONE);
+
+                            Log.d(TAG, "signInWithEmail:success");
+
+                            FirebaseUser currentuser = mAuth.getCurrentUser();
+                            updateUI(currentuser);
+
+                            startActivity(new Intent(LoginActivity.this,MainActivity.class));
+
+                        } else {
+
+                            loadingProgressBar.setVisibility(View.GONE);
+
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+
+                            updateUI(null);
+                        }
+                    }
+                });
+
+            }
+        });
 
         usernameEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -92,37 +131,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loadingProgressBar.setVisibility(View.VISIBLE);
-                String username = usernameEditText.getText().toString();
-                String password = passwordEditText.getText().toString();
 
-                mAuth.signInWithEmailAndPassword(username,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            loadingProgressBar.setVisibility(View.GONE);
-                            Log.d(TAG, "signInWithEmail:success");
-                            FirebaseUser currentuser = mAuth.getCurrentUser();
-                            updateUI(currentuser);
-                            startActivity(new Intent(LoginActivity.this,MainActivity.class));
-
-                        } else {
-                            loadingProgressBar.setVisibility(View.GONE);
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
-                        }
-                    }
-                });
-
-            }
-        });
-
+        usernameEditText.setText("rez@test.com");
+        passwordEditText.setText("abcdef");
     }
 
     private void updateUI(FirebaseUser currentuser) {
@@ -133,13 +144,9 @@ public class LoginActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        // Check if user is signed in (non-null) and log em out.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        if(currentUser != null) {
-            FirebaseAuth.getInstance().signOut();
         }
-        }
+
     }
 
 
