@@ -51,26 +51,15 @@
         app:layout_constraintStart_toStartOf="@+id/mileageAtStarteditText"
         app:layout_constraintTop_toBottomOf="@+id/mileageAtStarteditText" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="213dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:gravity="center_horizontal|center_vertical"
-        android:text="GPS Tracking will begin when you click start driving"
-        app:layout_constraintEnd_toEndOf="@+id/takepictuerofOdotmeterBtn"
-        app:layout_constraintStart_toStartOf="@+id/takepictuerofOdotmeterBtn"
-        app:layout_constraintTop_toBottomOf="@+id/takepictuerofOdotmeterBtn" />
-
     <Button
-        android:id="@+id/startDrivignBtn"
-        android:layout_width="257dp"
+        android:id="@+id/submitBtn1"
+        android:layout_width="0dp"
         android:layout_height="83dp"
-        android:layout_marginTop="24dp"
-        android:onClick="goToS4"
-        android:text="Start Driving"
+        android:layout_marginTop="104dp"
+        android:onClick="goToS2"
+        android:text="Submit"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintEnd_toEndOf="@+id/textView6"
-        app:layout_constraintStart_toStartOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintEnd_toEndOf="@+id/textView4"
+        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/takepictuerofOdotmeterBtn" />
 </androidx.constraintlayout.widget.ConstraintLayout>

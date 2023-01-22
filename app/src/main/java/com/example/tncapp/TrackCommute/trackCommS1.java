@@ -20,6 +20,9 @@ import java.util.Date;
 public class trackCommS1 extends AppCompatActivity {
 
     SQLiteDatabase db;
+    Date date;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,34 +45,15 @@ public class trackCommS1 extends AppCompatActivity {
 
     }
 
-//    public void onStart(){
-//        super.onStart();
-//
-//        Button yes = findViewById(R.id.yesBtn);
-//        yes.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-//
-//    }
 
-    public void createEntryforCommutor(){
-        Date date = new Date();
-        ContentValues values = new ContentValues();
-        values.put("DATETIME_FLOW_STARTED", date.toString());
-        try {
-            db.insert("TrackCommuteInfo",null,values);
-        }
-        catch (Exception e) {
-            Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
-        }
-    }
+
 
     public void startTrackCommuteS2(View view){
-        createEntryforCommutor();
-        startActivity(new Intent(this,com.example.tncapp.TrackCommute.trackCommS2.class));
+
+        date = new Date();
+        Intent intent = new Intent(this,com.example.tncapp.TrackCommute.trackCommS2.class);
+        intent.putExtra("DATETIME_FLOW_STARTED",date.toString());
+        startActivity(intent);
     }
 
     public void goToMainScreen(View view){

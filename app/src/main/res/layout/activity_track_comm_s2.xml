@@ -7,6 +7,17 @@
     android:backgroundTint="#0C0000"
     tools:context=".TrackCommute.trackCommS2">
 
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="213dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="GPS Tracking will begin when you click start driving"
+        app:layout_constraintEnd_toEndOf="@+id/overNightBtn"
+        app:layout_constraintStart_toStartOf="@+id/dayTripBtn"
+        app:layout_constraintTop_toBottomOf="@+id/dayTripBtn" />
+
     <Button
         android:id="@+id/dayTripBtn"
         android:layout_width="150dp"
@@ -45,7 +56,7 @@
     <Button
         android:id="@+id/truckBtn"
         android:layout_width="150dp"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_marginTop="24dp"
         android:onClick="gotToS3"
         android:text="Truck"
@@ -57,7 +68,7 @@
     <Button
         android:id="@+id/snwoMobileBtn"
         android:layout_width="150dp"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
         android:text="Snowmobile"
@@ -79,7 +90,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="Choose Vehicle Type"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -90,7 +101,7 @@
     <Button
         android:id="@+id/atvBtn"
         android:layout_width="150dp"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
         android:text="ATV"
@@ -114,15 +125,25 @@
         android:id="@+id/startDrivingBtn"
         android:layout_width="247dp"
         android:layout_height="75dp"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="87dp"
+        android:layout_marginTop="16dp"
         android:background="#000000"
         android:onClick="gotToS4"
         android:text="Start Driving"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dayTripBtn" />
+        app:layout_constraintEnd_toEndOf="@+id/textView6"
+        app:layout_constraintStart_toStartOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <ImageView
+        android:id="@+id/cameraIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:background="#4CAF50"
+        android:src="@android:drawable/ic_menu_camera"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/truckBtn"
+        app:layout_constraintStart_toEndOf="@+id/truckBtn"
+        app:layout_constraintTop_toTopOf="@+id/truckBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
