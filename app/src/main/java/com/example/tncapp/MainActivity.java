@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
         String UID = user.getUid().toString();
 
         myRef.child(UID).addListenerForSingleValueEvent(new ValueEventListener() {

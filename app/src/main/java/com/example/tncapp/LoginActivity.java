@@ -4,7 +4,9 @@ import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,12 +33,22 @@ public class LoginActivity extends AppCompatActivity {
     Button loginButton;
     ProgressBar loadingProgressBar;
 
+    SQLiteDatabase db;
+
     private FirebaseAuth mAuth;
     private FirebaseUser user;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        db = openOrCreateDatabase("LogInInfo",MODE_PRIVATE,null);
+        db.execSQL("CREATE TABLE IF NOT EXISTS LogInInfo(" +
+                "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+                "UID varchar(32)," +
+                "UserName varchar(32)," +
+                "email varchar(255)," +
+                "password varchar(255))");
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -65,6 +77,14 @@ public class LoginActivity extends AppCompatActivity {
 
                             FirebaseUser currentuser = mAuth.getCurrentUser();
                             updateUI(currentuser);
+
+
+
+                            ContentValues values = new ContentValues();
+                            values.put("UID", currentuser.getUid().trim());
+                            values.put("UserName",currentuser.toString().trim());
+                            values.put("email", username.trim());
+                            values.put("password", password.trim());
 
                             startActivity(new Intent(LoginActivity.this,MainActivity.class));
 

@@ -3,20 +3,29 @@ package com.example.tncapp.TrackCommute;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.tncapp.MainActivity;
 import com.example.tncapp.R;
+import com.google.firebase.FirebaseApp;
 
 public class trackCommS1 extends AppCompatActivity {
+
+    SQLiteDatabase TrackCommuteInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_track_comm_s1);
 
+        TrackCommuteInfo = openOrCreateDatabase("TrackCommuteInfo",MODE_PRIVATE,null);
+
+    }
+
+    public void createEntryforCommutor(){
 
     }
 
