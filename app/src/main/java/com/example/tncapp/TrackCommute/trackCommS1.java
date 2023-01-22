@@ -25,7 +25,7 @@ public class trackCommS1 extends AppCompatActivity {
     }
 
     public void goToMainScreen(View view){
-        Toast.makeText(this, "You are not required to track your commute in a vehicle if you are not the operator.", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "You are not required to track your vehicle commute.", Toast.LENGTH_LONG).show();
         startActivity(new Intent(this, MainActivity.class));
     }
 

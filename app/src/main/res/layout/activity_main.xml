@@ -66,7 +66,8 @@
         android:text="Start Task"
         android:textColor="#050000"
         app:layout_constraintStart_toStartOf="@+id/Hi"
-        app:layout_constraintTop_toBottomOf="@+id/Hi" />
+        app:layout_constraintTop_toBottomOf="@+id/Hi"
+        app:toggleCheckedStateOnClick="true" />
 
     <Button
         android:id="@+id/inProgressBtn"

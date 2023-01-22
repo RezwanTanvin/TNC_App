@@ -16,7 +16,7 @@ public class captureOdometerS3 extends AppCompatActivity {
         setContentView(R.layout.activity_capture_odometer_s3);
     }
 
-    public void gotToS4(View view){
+    public void goToS4(View view){
         startActivity(new Intent(this,endCommuteS4.class));
     }
 

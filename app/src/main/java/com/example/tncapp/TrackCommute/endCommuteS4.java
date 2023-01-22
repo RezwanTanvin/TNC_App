@@ -16,7 +16,7 @@ public class endCommuteS4 extends AppCompatActivity {
         setContentView(R.layout.activity_end_commute_s4);
     }
 
-    public void gotToS5(View view){
+    public void goToS5(View view){
         startActivity(new Intent(this,mileageConfirmationS5.class));
     }
 }
