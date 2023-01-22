@@ -85,12 +85,16 @@ public class LoginActivity extends AppCompatActivity {
                             values.put("UID", currentuser.getUid().trim());
                             values.put("UserName", currentuser.getDisplayName().trim());
                             values.put("email", username.trim());
-                            values.put("password", password.trim());
+                            values.put("password", password);
 
                             try
                             {
-
-                                db.insert("LogInInfo",null,values);
+                                db.execSQL("INSERT OR IGNORE INTO LogInInfo (UID,UserName,email,password) VALUES ('" +
+                                        currentuser.getUid().trim() + "','" +
+                                        currentuser.getDisplayName().trim() + "','" +
+                                        username.trim() + "','" + password + "');"
+                                        );
+                               // db.insert("LogInInfo",null,values);
                             }
                             catch (Exception e){
                                 Log.d(TAG, e.toString());
