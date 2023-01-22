@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
 
         usernameEditText = findViewById(R.id.username);
         passwordEditText = findViewById(R.id.password);
-        loginButton = findViewById(R.id.login);
+        loginButton = findViewById(R.id.loginBtn);
         loadingProgressBar = findViewById(R.id.loading);
 
         loginButton.setEnabled(false);
@@ -165,6 +165,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
 
 
+        }
+
+        public void goToSignUp (View view) {
+        startActivity(new Intent(this, SignUp.class));
         }
 
     }
