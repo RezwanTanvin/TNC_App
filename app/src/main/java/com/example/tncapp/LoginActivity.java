@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
@@ -43,9 +44,11 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         db = openOrCreateDatabase("LogInInfo",MODE_PRIVATE,null);
+
+        //db.execSQL("DROP TABLE LogInInfo");
+
         db.execSQL("CREATE TABLE IF NOT EXISTS LogInInfo(" +
-                "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
-                "UID varchar(32)," +
+                "UID varchar(32) NOT NULL PRIMARY KEY ," +
                 "UserName varchar(32)," +
                 "email varchar(255)," +
                 "password varchar(255))");
@@ -78,13 +81,20 @@ public class LoginActivity extends AppCompatActivity {
                             FirebaseUser currentuser = mAuth.getCurrentUser();
                             updateUI(currentuser);
 
-
-
                             ContentValues values = new ContentValues();
                             values.put("UID", currentuser.getUid().trim());
-                            values.put("UserName",currentuser.toString().trim());
+                            values.put("UserName", currentuser.getDisplayName().trim());
                             values.put("email", username.trim());
                             values.put("password", password.trim());
+
+                            try
+                            {
+
+                                db.insert("LogInInfo",null,values);
+                            }
+                            catch (Exception e){
+                                Log.d(TAG, e.toString());
+                            }
 
                             startActivity(new Intent(LoginActivity.this,MainActivity.class));
 
@@ -92,10 +102,10 @@ public class LoginActivity extends AppCompatActivity {
 
                             loadingProgressBar.setVisibility(View.GONE);
 
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+
+                            Toast.makeText(LoginActivity.this, "Authentication failed. " + task.getException()
+                                            .getMessage(),
+                                    Toast.LENGTH_LONG).show();
 
                             updateUI(null);
                         }

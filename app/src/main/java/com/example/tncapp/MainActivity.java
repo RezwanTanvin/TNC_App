@@ -21,9 +21,6 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth ;
     private FirebaseUser user;
 
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("UserName");
-
     TextView userName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +30,6 @@ public class MainActivity extends AppCompatActivity {
         userName = findViewById(R.id.Hi);
 
         mAuth = FirebaseAuth.getInstance();
-
-
         user = mAuth.getCurrentUser();
 
     }
@@ -43,20 +38,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        String UID = user.getUid().toString();
+        String UID = user.getUid();
+        userName.setText("Hello\n" + user.getDisplayName());
 
-        myRef.child(UID).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String Username = snapshot.getValue(String.class);
-                if (Username!= null) userName.setText("Hello\n" + Username);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
     }
 
