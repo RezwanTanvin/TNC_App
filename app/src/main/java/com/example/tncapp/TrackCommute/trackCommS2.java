@@ -171,7 +171,7 @@ public class trackCommS2 extends AppCompatActivity {
 
     public void createEntryforCommutor(){
         Date startedDrivingAt = new Date();
-        values.put("DATETIME_FLOW_STARTED", date.toString());
+        values.put("DATETIME_FLOW_STARTED", date);
         values.put("VEHICLE_OPERATOR", "yes");
         values.put("STARTED_DRIVING_AT", startedDrivingAt.toString());
         values.put("STARTING_MILEAGE", "N/A");

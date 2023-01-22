@@ -127,13 +127,8 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (!passwordEditText.getText().toString().isEmpty() && !usernameEditText.getText().toString().isEmpty()){
-                    //loginButton.setClickable(true);
-                    loginButton.setEnabled(true);
-                }
-                else {
-                    loginButton.setEnabled(false);
-                }
+                //loginButton.setClickable(true);
+                loginButton.setEnabled(!passwordEditText.getText().toString().isEmpty() && !usernameEditText.getText().toString().isEmpty());
             }
 
             @Override
@@ -150,13 +145,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (!passwordEditText.getText().toString().isEmpty() && !usernameEditText.getText().toString().isEmpty()){
-
-                    loginButton.setEnabled(true);
-                }
-                else {
-                    loginButton.setEnabled(false);
-                }
+                loginButton.setEnabled(!passwordEditText.getText().toString().isEmpty() && !usernameEditText.getText().toString().isEmpty());
             }
 
             @Override
