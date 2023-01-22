@@ -8,20 +8,15 @@ import android.view.View;
 
 import com.example.tncapp.R;
 
-public class trackCommS2 extends AppCompatActivity {
+public class captureOdometerS3 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_track_comm_s2);
-    }
-
-    public void gotToS3(View view){
-        startActivity(new Intent(this,captureOdometerS3.class));
+        setContentView(R.layout.activity_capture_odometer_s3);
     }
 
     public void gotToS4(View view){
-
         startActivity(new Intent(this,endCommuteS4.class));
     }
 

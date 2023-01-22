@@ -8,21 +8,15 @@ import android.view.View;
 
 import com.example.tncapp.R;
 
-public class trackCommS2 extends AppCompatActivity {
+public class mileageConfirmationS5 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_track_comm_s2);
+        setContentView(R.layout.activity_mileage_confirmation_s5);
     }
 
-    public void gotToS3(View view){
-        startActivity(new Intent(this,captureOdometerS3.class));
+    public void gotToS6(View view){
+        startActivity(new Intent(this,collectCorrectOdometerS6.class));
     }
-
-    public void gotToS4(View view){
-
-        startActivity(new Intent(this,endCommuteS4.class));
-    }
-
 }

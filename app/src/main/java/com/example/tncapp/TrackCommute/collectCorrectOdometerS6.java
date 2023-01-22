@@ -6,23 +6,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.tncapp.MainActivity;
 import com.example.tncapp.R;
 
-public class trackCommS2 extends AppCompatActivity {
+public class collectCorrectOdometerS6 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_track_comm_s2);
+        setContentView(R.layout.activity_collect_correct_odometer_s6);
     }
 
-    public void gotToS3(View view){
-        startActivity(new Intent(this,captureOdometerS3.class));
+    public void goToMainScreen(View view){
+        startActivity(new Intent(this, MainActivity.class));
     }
-
-    public void gotToS4(View view){
-
-        startActivity(new Intent(this,endCommuteS4.class));
-    }
-
 }
