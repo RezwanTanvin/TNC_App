@@ -8,6 +8,8 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +25,8 @@ public class captureOdometerS3 extends AppCompatActivity {
     Button takePic;
     ImageView imageview;
 
+    Button submitBtn;
+
     private static final int CAMERA_REQUEST = 1888;
 
     @Override
@@ -33,10 +37,44 @@ public class captureOdometerS3 extends AppCompatActivity {
         mileage= findViewById(R.id.mileageAtStarteditText);
         takePic = findViewById(R.id.takepictuerofOdotmeterBtn);
         imageview = findViewById(R.id.imageView);
+        submitBtn = findViewById(R.id.submitBtn1);
+        submitBtn.setEnabled(false);
+        takePic.setEnabled(false);
     }
 
     public void onStart(){
         super.onStart();
+
+        mileage.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                if (mileage.getText().toString().isEmpty()) {
+                    submitBtn.setEnabled(false);
+                    takePic.setEnabled(false);
+                }
+                    else{
+                        submitBtn.setEnabled(true);
+                        takePic.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!mileage.getText().toString().isEmpty()) {
+                    submitBtn.setEnabled(true);
+                    takePic.setEnabled(true);
+                }
+                else {
+                    submitBtn.setEnabled(false);
+                    takePic.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         takePic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,9 +111,9 @@ public class captureOdometerS3 extends AppCompatActivity {
             mileage.getText().toString().trim();
         }
 
-
-
-        startActivity(new Intent(this,trackCommS2.class));
+        Intent intent = new Intent(this,trackCommS2.class);
+        intent.putExtra("Mileage",mileage.getText().toString().trim());
+        startActivity(intent);
     }
 
 }

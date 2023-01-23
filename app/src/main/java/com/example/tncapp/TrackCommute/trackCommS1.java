@@ -33,7 +33,6 @@ public class trackCommS1 extends AppCompatActivity {
 
         db.execSQL("CREATE TABLE IF NOT EXISTS TrackCommuteInfo (" +
                 "ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT ," +
-                "DATETIME_FLOW_STARTED varchar(32)," +
                 "VEHICLE_OPERATOR varchar(32)," +
                 "VEHICLE_TYPE varchar(32)," +
                 "TRIP_TYPE varchar(32)," +
@@ -50,9 +49,9 @@ public class trackCommS1 extends AppCompatActivity {
 
     public void startTrackCommuteS2(View view){
 
-        date = new Date();
+       // date = new Date();
         Intent intent = new Intent(this,com.example.tncapp.TrackCommute.trackCommS2.class);
-        intent.putExtra("DATETIME_FLOW_STARTED",date.toString());
+        //intent.putExtra("DATETIME_FLOW_STARTED",date.toString());
         startActivity(intent);
     }
 

@@ -38,6 +38,8 @@ public class trackCommS2 extends AppCompatActivity {
     Intent intent ;
     String date;
 
+    String mileage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,12 +71,28 @@ public class trackCommS2 extends AppCompatActivity {
         flag1 = false;
         flag2 = false;
 
-        intent = getIntent();
-        date = intent.getStringExtra("DATETIME_FLOW_STARTED");
+        values = new ContentValues();
 
+        intent = getIntent();
+
+//        if(intent.getStringExtra("DATETIME_FLOW_STARTED") != null)
+//        {
+//            date = intent.getStringExtra("DATETIME_FLOW_STARTED");
+//        }
+
+        if ( intent.getStringExtra("Mileage")!= null)
+        {
+            mileage = intent.getStringExtra("Mileage");
+            truck.setBackgroundColor(Color.WHITE);
+            truck.setTextColor(Color.BLACK);
+            values.put("VEHICLE_TYPE","Truck");
+            flag1 = true;
+
+        };
+        
         db = openOrCreateDatabase("TrackCommuteInfo",MODE_PRIVATE,null);
 
-        values = new ContentValues();
+
     }
 
     public void onStart(){
@@ -171,7 +189,7 @@ public class trackCommS2 extends AppCompatActivity {
 
     public void createEntryforCommutor(){
         Date startedDrivingAt = new Date();
-        values.put("DATETIME_FLOW_STARTED", date);
+       // values.put("DATETIME_FLOW_STARTED", date);
         values.put("VEHICLE_OPERATOR", "yes");
         values.put("STARTED_DRIVING_AT", startedDrivingAt.toString());
         values.put("STARTING_MILEAGE", "N/A");

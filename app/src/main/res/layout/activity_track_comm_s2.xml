@@ -16,7 +16,8 @@
         android:text="GPS Tracking will begin when you click start driving"
         app:layout_constraintEnd_toEndOf="@+id/overNightBtn"
         app:layout_constraintStart_toStartOf="@+id/dayTripBtn"
-        app:layout_constraintTop_toBottomOf="@+id/dayTripBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/dayTripBtn"
+        tools:visibility="invisible" />
 
     <Button
         android:id="@+id/dayTripBtn"

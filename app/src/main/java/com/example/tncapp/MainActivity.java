@@ -1,9 +1,20 @@
 package com.example.tncapp;
 
+import static android.Manifest.permission.ACCESS_BACKGROUND_LOCATION;
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static android.Manifest.permission.ACCESS_WIFI_STATE;
+import static android.Manifest.permission.CAMERA;
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int PERMISSION_REQUEST_CODE = 200;
     private FirebaseAuth mAuth ;
     private FirebaseUser user;
 
@@ -31,6 +43,19 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
+
+        if(checkSelfPermission(CAMERA) != PackageManager.PERMISSION_GRANTED ){
+            ActivityCompat.requestPermissions(this, new String[]{
+                    ACCESS_FINE_LOCATION,
+                    ACCESS_BACKGROUND_LOCATION,
+                    ACCESS_COARSE_LOCATION,
+                    ACCESS_WIFI_STATE,
+                    CAMERA,
+                    AUDIO_SERVICE,
+                    WRITE_EXTERNAL_STORAGE,
+                    READ_EXTERNAL_STORAGE,
+            }, PERMISSION_REQUEST_CODE);
+        };
 
     }
 

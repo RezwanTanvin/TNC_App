@@ -86,14 +86,11 @@
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_marginTop="32dp"
-        android:background="@drawable/roundedcorner"
-        android:backgroundTint="#000000"
-        android:foreground="@color/teal_700"
         android:onClick="startTrackCommute"
         app:layout_constraintEnd_toEndOf="@+id/startTaskBtn"
         app:layout_constraintStart_toStartOf="@+id/startTaskBtn"
         app:layout_constraintTop_toBottomOf="@+id/startTaskBtn"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        app:srcCompat="@drawable/square_box" />
 
     <ImageView
         android:id="@+id/harvestProductImage"
@@ -101,11 +98,10 @@
         android:layout_height="110dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/roundedcorner"
-        android:backgroundTint="#000000"
-        android:foreground="@color/teal_700"
+        android:backgroundTint="#66000000"
         app:layout_constraintStart_toStartOf="@+id/trackCommuteImage"
         app:layout_constraintTop_toBottomOf="@+id/trackCommuteImage"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        tools:srcCompat="@drawable/square_box" />
 
     <ImageView
         android:id="@+id/processHarvestImage"
@@ -113,11 +109,10 @@
         android:layout_height="110dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/roundedcorner"
-        android:backgroundTint="#000000"
-        android:foreground="@color/teal_700"
+        android:backgroundTint="#66000000"
         app:layout_constraintStart_toStartOf="@+id/harvestProductImage"
         app:layout_constraintTop_toBottomOf="@+id/harvestProductImage"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        tools:srcCompat="@drawable/square_box" />
 
     <TextView
         android:id="@+id/trackCommuteLabel"
