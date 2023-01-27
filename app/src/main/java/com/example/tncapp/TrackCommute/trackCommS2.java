@@ -12,6 +12,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.tncapp.R;
@@ -39,6 +40,8 @@ public class trackCommS2 extends AppCompatActivity {
     String date;
 
     String mileage;
+    ImageView cameraIcon;
+    String FilePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,7 @@ public class trackCommS2 extends AppCompatActivity {
 
         driveNow = findViewById(R.id.startDrivingBtn);
         driveNow.setEnabled(false);
+        cameraIcon = findViewById(R.id.cameraIcon);
 
         flag1 = false;
         flag2 = false;
@@ -87,8 +91,13 @@ public class trackCommS2 extends AppCompatActivity {
             truck.setTextColor(Color.BLACK);
             values.put("VEHICLE_TYPE","Truck");
             flag1 = true;
+            cameraIcon.setVisibility(View.VISIBLE);
 
         };
+        if ( intent.getStringExtra("FilePath")!= null)
+        {
+            FilePath = intent.getStringExtra("FilePath");
+        }
         
         db = openOrCreateDatabase("TrackCommuteInfo",MODE_PRIVATE,null);
 
@@ -171,7 +180,12 @@ public class trackCommS2 extends AppCompatActivity {
         flag1 = true;
         enableDriveButton();
 
-        startActivity(new Intent(this,captureOdometerS3.class));
+        Intent intent = new Intent(trackCommS2.this, com.example.tncapp.TrackCommute.captureOdometerS3.class);
+        if(FilePath!= null && mileage != null){
+            intent.putExtra("FilePath",FilePath);
+            intent.putExtra("Mileage",mileage);
+        }
+        startActivity(intent);
     }
 
     public void gotToS4(View view) // Start driving button onClick calls this

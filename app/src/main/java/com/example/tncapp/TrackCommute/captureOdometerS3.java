@@ -59,6 +59,7 @@ public class captureOdometerS3 extends AppCompatActivity {
             thumbnail.setEnabled(true);
             thumbnail.setImageBitmap(bitmap);
             header.setText("Confirm the following information");
+            takePic.setVisibility(View.INVISIBLE);
 
         }
         else
@@ -159,6 +160,7 @@ public class captureOdometerS3 extends AppCompatActivity {
 
         Intent intent = new Intent(this,trackCommS2.class);
         intent.putExtra("Mileage",mileage.getText().toString().trim());
+        intent.putExtra("FilePath",FilePath);
         startActivity(intent);
     }
 
