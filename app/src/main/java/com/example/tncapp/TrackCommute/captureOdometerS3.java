@@ -2,19 +2,17 @@ package com.example.tncapp.TrackCommute;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.example.tncapp.Camera;
 import com.example.tncapp.R;
@@ -23,11 +21,16 @@ public class captureOdometerS3 extends AppCompatActivity {
 
     EditText mileage ;
     Button takePic;
-    ImageView imageview;
+    ImageView thumbnail;
 
     Button submitBtn;
 
-    private static final int CAMERA_REQUEST = 1888;
+   Intent intent;
+   String FilePath;
+   String mileageFromCameraClass;
+   TextView header;
+
+    //private static final int CAMERA_REQUEST = 1888;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +39,42 @@ public class captureOdometerS3 extends AppCompatActivity {
 
         mileage= findViewById(R.id.mileageAtStarteditText);
         takePic = findViewById(R.id.takepictuerofOdotmeterBtn);
-        imageview = findViewById(R.id.imageView);
+        thumbnail = findViewById(R.id.imageView);
         submitBtn = findViewById(R.id.submitBtn1);
         submitBtn.setEnabled(false);
         takePic.setEnabled(false);
+        header = findViewById(R.id.textView4);
     }
 
     public void onStart(){
         super.onStart();
+
+        intent = getIntent();
+
+        if ( intent.getStringExtra("FilePath")!= null)
+        {
+            FilePath = intent.getStringExtra("FilePath");
+
+            Bitmap bitmap = BitmapFactory.decodeFile(FilePath);
+            thumbnail.setEnabled(true);
+            thumbnail.setImageBitmap(bitmap);
+            header.setText("Confirm the following information");
+
+        }
+        else
+        {
+            FilePath = "";
+            thumbnail.setEnabled(false);
+        }
+
+        if ( intent.getStringExtra("Mileage")!= null)
+        {
+            mileageFromCameraClass = intent.getStringExtra("Mileage");
+
+            mileage.setText(mileageFromCameraClass);
+            submitBtn.setEnabled(true);
+        }
+
 
         mileage.addTextChangedListener(new TextWatcher() {
             @Override
@@ -76,11 +107,26 @@ public class captureOdometerS3 extends AppCompatActivity {
             }
         });
 
+        thumbnail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(captureOdometerS3.this, ImagePreview.class);
+                intent.putExtra("FilePath",FilePath);
+                startActivity(intent);
+            }
+        });
+
         takePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 {
-                    startActivity(new Intent(captureOdometerS3.this, Camera.class));
+                    if(mileage != null) {
+                        mileage.getText().toString().trim();
+                    }
+
+                    Intent intent = new Intent(captureOdometerS3.this, Camera.class);
+                    intent.putExtra("Mileage",mileage.getText().toString().trim());
+                    startActivity(intent);
 
                 }
             }
@@ -105,7 +151,7 @@ public class captureOdometerS3 extends AppCompatActivity {
 
 
 
-    public void goToS2(View view) //This ic called by the submit button.
+    public void goToS2(View view) //This is called by the submit button.
     {
         if(mileage != null) {
             mileage.getText().toString().trim();

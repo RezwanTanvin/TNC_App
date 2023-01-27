@@ -10,13 +10,20 @@ import static android.Manifest.permission.READ_MEDIA_AUDIO;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.ImageCapture;
@@ -26,6 +33,8 @@ import androidx.camera.video.VideoCapture;
 import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import com.example.tncapp.TrackCommute.trackCommS2;
 import com.example.tncapp.databinding.ActivityMainBinding;
 import com.google.common.util.concurrent.ListenableFuture;
 
@@ -42,6 +51,8 @@ import java.util.concurrent.Executors;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.core.Preview;
@@ -64,19 +75,26 @@ import java.util.Locale;
 
 import android.os.Bundle;
 import android.Manifest;
+import android.net.Uri;
+import android.widget.ImageView;
+import androidx.camera.core.ImageCapture;
+import androidx.camera.core.ImageProxy;
 
 
 
 public class Camera extends AppCompatActivity implements View.OnClickListener {
 
     static final int PERMISSION_REQUEST_CODE = 200 ;
-
     private ListenableFuture<ProcessCameraProvider> cameraProviderListenableFuture;
     Button picCapture,flashToogle;
     private  ImageCapture imageCapture;
     PreviewView previewView;
+    Intent intent;
+    String Mileage;
+    TextView flashLabel;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,24 +105,33 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
         picCapture = findViewById(R.id.image_capture_button);
         //videoCapture = findViewById(R.id.video_capture_button);
         flashToogle = findViewById(R.id.flashToogle);
+        flashLabel = findViewById(R.id.flashOnOff);
 
         picCapture.setOnClickListener(this);
         flashToogle.setOnClickListener(this);
+        flashLabel.setOnClickListener(this);
 
-        //videoCapture.setOnClickListener(this);
+        intent = getIntent();
 
-//        if(checkSelfPermission(CAMERA) != PackageManager.PERMISSION_GRANTED ){
-//            ActivityCompat.requestPermissions(this, new String[]{
-//                    ACCESS_FINE_LOCATION,
-//                    ACCESS_BACKGROUND_LOCATION,
-//                    ACCESS_COARSE_LOCATION,
-//                    ACCESS_WIFI_STATE,
-//                    CAMERA,
-//                    AUDIO_SERVICE,
-//                    WRITE_EXTERNAL_STORAGE,
-//                    READ_EXTERNAL_STORAGE,
-//                    }, PERMISSION_REQUEST_CODE);
-//        };
+        if ( intent.getStringExtra("Mileage")!= null) {
+            Mileage = intent.getStringExtra("Mileage");
+        }
+
+            //videoCapture.setOnClickListener(this);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE ) != PackageManager.PERMISSION_GRANTED )
+        {
+            ActivityCompat.requestPermissions(this, new String[]{
+                    ACCESS_FINE_LOCATION,
+                    ACCESS_BACKGROUND_LOCATION,
+                    ACCESS_COARSE_LOCATION,
+                    ACCESS_WIFI_STATE,
+                    CAMERA,
+                    AUDIO_SERVICE,
+                    WRITE_EXTERNAL_STORAGE,
+                    READ_EXTERNAL_STORAGE,
+                    }, PERMISSION_REQUEST_CODE);
+        };
 
 
 
@@ -116,10 +143,7 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
                 startCameraX(cameraProvider);
             }
 
-            catch (ExecutionException e){
-                e.printStackTrace();
-            }
-            catch(InterruptedException e){
+            catch (ExecutionException | InterruptedException e){
                 e.printStackTrace();
             }
 
@@ -146,12 +170,14 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
         preview.setSurfaceProvider(previewView.getSurfaceProvider());
 
         imageCapture = new ImageCapture.Builder()
-                .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
+                .setCaptureMode(ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY)
                 .build();
 
-        cameraProvider.bindToLifecycle((LifecycleOwner) this,cameraSelector,preview,imageCapture);
+        cameraProvider.bindToLifecycle(this,cameraSelector,preview,imageCapture);
 
-       imageCapture.setFlashMode(ImageCapture.FLASH_MODE_ON);
+       imageCapture.setFlashMode(ImageCapture.FLASH_MODE_AUTO);
+        flashLabel.setText("Auto Flash");
+
 
 
     }
@@ -165,12 +191,25 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
                 break;
            // case R.id.video_capture_button:
                // break;
-            case R.id.flashToogle:
+            case R.id.flashToogle :
                 if (imageCapture.getFlashMode() == ImageCapture.FLASH_MODE_ON)
                 {
                     imageCapture.setFlashMode(ImageCapture.FLASH_MODE_OFF);
+                    flashLabel.setText("Flash OFF");
+
                 } else {
                     imageCapture.setFlashMode(ImageCapture.FLASH_MODE_ON);
+                    flashLabel.setText("Flash ON");
+                }
+            case R.id.flashOnOff:
+                if (imageCapture.getFlashMode() == ImageCapture.FLASH_MODE_ON)
+                {
+                    imageCapture.setFlashMode(ImageCapture.FLASH_MODE_OFF);
+                    flashLabel.setText("Flash OFF");
+
+                } else {
+                    imageCapture.setFlashMode(ImageCapture.FLASH_MODE_ON);
+                    flashLabel.setText("Flash ON");
                 }
         }
     }
@@ -178,10 +217,12 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
     private void capturePhoto() {
 
 
-        File photoDir = new File("/mnt/sdcard/Pictures/");
+        File photoDir = new File(Environment.getExternalStorageDirectory() + "/Pictures/TNC_App");
 
-        if(!photoDir.exists()){
-           photoDir.mkdir();
+
+        if(!photoDir.exists())
+        {
+           photoDir.mkdirs();
         }
 
         Date date = new Date();
@@ -189,27 +230,33 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
         String timestamp = String.valueOf(date.getTime());
         String photoFilePath = photoDir.getAbsolutePath() + "/" + timestamp + ".jpg";
 
-        File photofile = new File(photoFilePath);
+        File photoFile = new File(photoFilePath);
 
-        imageCapture.takePicture(new ImageCapture.OutputFileOptions.Builder(photofile).build(),
+        imageCapture.takePicture(new ImageCapture.OutputFileOptions.Builder(photoFile).build(),
                 getExecutor(),
                 new ImageCapture.OnImageSavedCallback() {
                     @Override
                     public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
                         Toast.makeText(Camera.this, "Image saved successfully", Toast.LENGTH_SHORT).show();
+
+
+                        Intent intent = new Intent(Camera.this, com.example.tncapp.TrackCommute.captureOdometerS3.class);
+                        intent.putExtra("FilePath",photoFilePath);
+                        intent.putExtra("Mileage", Mileage);
+                        startActivity(intent);
+
                     }
 
                     @Override
                     public void onError(@NonNull ImageCaptureException exception) {
                         //Toast.makeText(Camera.this, exception.toString(), Toast.LENGTH_LONG).show();
-                        Toast.makeText(Camera.this, "Image saved successfully", Toast.LENGTH_SHORT).show();
-                        finish();
+                        Toast.makeText(Camera.this, "Image failed to save. Error : " + exception.toString() , Toast.LENGTH_SHORT).show();
+
                     }
                 });
 
-
-
     }
+
 
 
 };

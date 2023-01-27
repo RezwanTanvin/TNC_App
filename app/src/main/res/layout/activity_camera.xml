@@ -11,8 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:foreground="@drawable/roundedcorner"
-        tools:layout_editor_absoluteX="182dp"
-        tools:layout_editor_absoluteY="-50dp"/>
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" >
+
+    </androidx.camera.view.PreviewView>
 
     <Button
         android:id="@+id/image_capture_button"
@@ -52,6 +54,18 @@
         app:layout_constraintStart_toEndOf="@+id/image_capture_button"
         app:layout_constraintTop_toTopOf="@+id/image_capture_button" />
 
+    <TextView
+        android:id="@+id/flashOnOff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Flash On"
+        android:textColor="#C8C3C3"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/flashToogle"
+        app:layout_constraintStart_toStartOf="@+id/flashToogle"
+        app:layout_constraintTop_toBottomOf="@+id/flashToogle" />
+
     <Button
         android:id="@+id/video_capture_button"
         android:layout_width="397dp"
@@ -62,6 +76,7 @@
         android:foreground="@drawable/square_box"
         app:layout_constraintBottom_toTopOf="@+id/image_capture_button"
         app:layout_constraintEnd_toEndOf="@+id/previewView"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="@+id/previewView"
         app:layout_constraintTop_toTopOf="parent"
         app:strokeColor="#704747" />
