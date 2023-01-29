@@ -17,14 +17,14 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/logo"
+        android:icon="@mipmap/tnc_logo"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.TNCApp"
         tools:targetApi="31">
         <activity
-            android:name=".TrackCommute.ImagePreview"
+            android:name=".ImagePreview"
             android:exported="false" />
         <activity
             android:name=".Camera"
@@ -33,22 +33,22 @@
             android:name=".SignUp"
             android:exported="false" />
         <activity
-            android:name=".TrackCommute.collectCorrectOdometerS6"
+            android:name=".TrackCommute.S6_collectCorrectOdometer"
             android:exported="false" />
         <activity
-            android:name=".TrackCommute.mileageConfirmationS5"
+            android:name=".TrackCommute.S5_mileageConfirmation"
             android:exported="false" />
         <activity
-            android:name=".TrackCommute.endCommuteS4"
+            android:name=".TrackCommute.S4_endCommute"
             android:exported="false" />
         <activity
-            android:name=".TrackCommute.captureOdometerS3"
+            android:name=".TrackCommute.S3_captureOdometer"
             android:exported="false" />
         <activity
-            android:name=".TrackCommute.trackCommS2"
+            android:name=".TrackCommute.S2_collectVehicleTripInfo"
             android:exported="false" />
         <activity
-            android:name=".TrackCommute.trackCommS1"
+            android:name=".TrackCommute.S1_areYouDriver"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

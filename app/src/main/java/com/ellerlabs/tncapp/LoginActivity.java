@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -42,6 +43,8 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
         db = openOrCreateDatabase("LogInInfo",MODE_PRIVATE,null);
 
@@ -115,7 +118,6 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
-
             }
         });
 

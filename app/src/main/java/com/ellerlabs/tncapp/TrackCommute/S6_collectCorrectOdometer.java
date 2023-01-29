@@ -9,7 +9,7 @@ import android.view.View;
 import com.ellerlabs.tncapp.MainActivity;
 import com.ellerlabs.tncapp.R;
 
-public class collectCorrectOdometerS6 extends AppCompatActivity {
+public class S6_collectCorrectOdometer extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

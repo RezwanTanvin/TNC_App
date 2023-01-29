@@ -18,8 +18,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.ellerlabs.tncapp.TrackCommute.trackCommS1;
-import com.ellerlabs.tncapp.R;
+import com.ellerlabs.tncapp.TrackCommute.S1_areYouDriver;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -52,20 +51,21 @@ public class MainActivity extends AppCompatActivity {
             }, PERMISSION_REQUEST_CODE);
         };
 
+        String UID = user.getUid();
+        userName.setText("Hello\n" + user.getDisplayName());
+
+
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        String UID = user.getUid();
-        userName.setText("Hello\n" + user.getDisplayName());
-
-
     }
 
     public void startTrackCommute(View view){
-        startActivity(new Intent(this, trackCommS1.class));
+        startActivity(new Intent(this, S1_areYouDriver.class));
     }
 
 }

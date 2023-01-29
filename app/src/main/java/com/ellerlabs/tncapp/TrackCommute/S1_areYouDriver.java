@@ -13,7 +13,7 @@ import com.ellerlabs.tncapp.R;
 
 import java.util.Date;
 
-public class trackCommS1 extends AppCompatActivity {
+public class S1_areYouDriver extends AppCompatActivity {
 
     SQLiteDatabase db;
     Date date;
@@ -29,11 +29,14 @@ public class trackCommS1 extends AppCompatActivity {
 
         db.execSQL("CREATE TABLE IF NOT EXISTS TrackCommuteInfo (" +
                 "ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT ," +
-                "VEHICLE_OPERATOR varchar(32)," +
                 "VEHICLE_TYPE varchar(32)," +
                 "TRIP_TYPE varchar(32)," +
                 "STARTING_MILEAGE varchar(32)," +
-                "STARTED_DRIVING_AT varchar(32)," +
+                "STARTING_MILEAGE varchar(32)," +
+                "ODOMETER_IMAGE_URI varchar(32)," +
+                "STARTED_DRIVING_AT_TIME varchar(32)," +
+                "ENDED_DRIVING_AT_TIME varchar(32)," +
+                "TOTAL_MILES_DRIVEN_FROM_GPS varchar(32)," +
                 "OVERRIDE_MILEAGE varchar(32)," +
                 "FINAL_MILEAGE varchar(32))");
 
@@ -46,7 +49,7 @@ public class trackCommS1 extends AppCompatActivity {
     public void startTrackCommuteS2(View view){
 
        // date = new Date();
-        Intent intent = new Intent(this, trackCommS2.class);
+        Intent intent = new Intent(this, S2_collectVehicleTripInfo.class);
         //intent.putExtra("DATETIME_FLOW_STARTED",date.toString());
         startActivity(intent);
     }

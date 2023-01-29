@@ -9,7 +9,7 @@ import android.view.View;
 import com.ellerlabs.tncapp.MainActivity;
 import com.ellerlabs.tncapp.R;
 
-public class mileageConfirmationS5 extends AppCompatActivity {
+public class S5_mileageConfirmation extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +18,7 @@ public class mileageConfirmationS5 extends AppCompatActivity {
     }
 
     public void goToS6(View view){
-        startActivity(new Intent(this,collectCorrectOdometerS6.class));
+        startActivity(new Intent(this, S6_collectCorrectOdometer.class));
     }
 
     public void goToMainScreen(View view){

@@ -15,9 +15,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ellerlabs.tncapp.Camera;
+import com.ellerlabs.tncapp.ImagePreview;
 import com.ellerlabs.tncapp.R;
 
-public class captureOdometerS3 extends AppCompatActivity {
+public class S3_captureOdometer extends AppCompatActivity {
 
     EditText mileage ;
     Button takePic;
@@ -111,7 +112,7 @@ public class captureOdometerS3 extends AppCompatActivity {
         thumbnail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(captureOdometerS3.this, ImagePreview.class);
+                Intent intent = new Intent(S3_captureOdometer.this, ImagePreview.class);
                 intent.putExtra("FilePath",FilePath);
                 startActivity(intent);
             }
@@ -125,7 +126,7 @@ public class captureOdometerS3 extends AppCompatActivity {
                         mileage.getText().toString().trim();
                     }
 
-                    Intent intent = new Intent(captureOdometerS3.this, Camera.class);
+                    Intent intent = new Intent(S3_captureOdometer.this, Camera.class);
                     intent.putExtra("Mileage",mileage.getText().toString().trim());
                     startActivity(intent);
 
@@ -158,7 +159,7 @@ public class captureOdometerS3 extends AppCompatActivity {
             mileage.getText().toString().trim();
         }
 
-        Intent intent = new Intent(this,trackCommS2.class);
+        Intent intent = new Intent(this, S2_collectVehicleTripInfo.class);
         intent.putExtra("Mileage",mileage.getText().toString().trim());
         intent.putExtra("FilePath",FilePath);
         startActivity(intent);

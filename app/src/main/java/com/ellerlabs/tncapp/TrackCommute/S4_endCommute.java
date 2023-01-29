@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class endCommuteS4 extends AppCompatActivity {
+public class S4_endCommute extends AppCompatActivity {
 
     TextView timer;
     long date ;
@@ -59,7 +59,7 @@ public class endCommuteS4 extends AppCompatActivity {
     public void goToS5(View view){
 
         timerRunning= false;
-        startActivity(new Intent(this,mileageConfirmationS5.class));
+        startActivity(new Intent(this, S5_mileageConfirmation.class));
 
     }
 }

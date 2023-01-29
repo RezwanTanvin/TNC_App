@@ -23,8 +23,7 @@ import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.ellerlabs.tncapp.TrackCommute.captureOdometerS3;
-import com.ellerlabs.tncapp.R;
+import com.ellerlabs.tncapp.TrackCommute.S3_captureOdometer;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.io.File;
@@ -199,7 +198,7 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
                         Toast.makeText(Camera.this, "Image saved successfully", Toast.LENGTH_SHORT).show();
 
 
-                        Intent intent = new Intent(Camera.this, captureOdometerS3.class);
+                        Intent intent = new Intent(Camera.this, S3_captureOdometer.class);
                         intent.putExtra("FilePath",photoFilePath);
                         intent.putExtra("Mileage", Mileage);
                         startActivity(intent);

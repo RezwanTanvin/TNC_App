@@ -12,11 +12,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.ellerlabs.tncapp.ImagePreview;
 import com.ellerlabs.tncapp.R;
 
 import java.util.Date;
 
-public class trackCommS2 extends AppCompatActivity {
+public class S2_collectVehicleTripInfo extends AppCompatActivity {
     Button atv;
     Button snowmobile;
     Button truck ;
@@ -106,7 +107,7 @@ public class trackCommS2 extends AppCompatActivity {
         cameraIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(trackCommS2.this, ImagePreview.class);
+                Intent intent = new Intent(S2_collectVehicleTripInfo.this, ImagePreview.class);
                 intent.putExtra("FilePath", FilePath);
                 startActivity(intent);
             }
@@ -185,7 +186,7 @@ public class trackCommS2 extends AppCompatActivity {
         flag1 = true;
         enableDriveButton();
 
-        Intent intent = new Intent(trackCommS2.this, captureOdometerS3.class);
+        Intent intent = new Intent(S2_collectVehicleTripInfo.this, S3_captureOdometer.class);
         if(FilePath!= null && mileage != null){
             intent.putExtra("FilePath",FilePath);
             intent.putExtra("Mileage",mileage);
@@ -197,7 +198,7 @@ public class trackCommS2 extends AppCompatActivity {
     {
         createEntryforCommutor();
 
-        startActivity(new Intent(this,endCommuteS4.class));
+        startActivity(new Intent(this, S4_endCommute.class));
     }
 
     public void enableDriveButton(){
