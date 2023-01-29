@@ -1,4 +1,4 @@
-package com.example.tncapp.TrackCommute;
+package com.ellerlabs.tncapp.TrackCommute;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,8 +14,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.tncapp.Camera;
-import com.example.tncapp.R;
+import com.ellerlabs.tncapp.Camera;
+import com.ellerlabs.tncapp.R;
 
 public class captureOdometerS3 extends AppCompatActivity {
 

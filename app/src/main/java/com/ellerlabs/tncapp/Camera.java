@@ -1,4 +1,4 @@
-package com.example.tncapp;
+package com.ellerlabs.tncapp;
 
 import static android.Manifest.permission.ACCESS_BACKGROUND_LOCATION;
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
@@ -6,80 +6,42 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.ACCESS_WIFI_STATE;
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
-import static android.Manifest.permission.READ_MEDIA_AUDIO;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.ColorStateList;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.camera.core.ImageCapture;
-import androidx.camera.video.Recorder;
-import androidx.camera.video.Recording;
-import androidx.camera.video.VideoCapture;
 import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.tncapp.TrackCommute.trackCommS2;
-import com.example.tncapp.databinding.ActivityMainBinding;
+import com.ellerlabs.tncapp.TrackCommute.captureOdometerS3;
+import com.ellerlabs.tncapp.R;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.core.Preview;
 import androidx.camera.core.CameraSelector;
-import android.util.Log;
-import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageCaptureException;
-import androidx.camera.core.ImageProxy;
-import androidx.camera.video.FallbackStrategy;
-import androidx.camera.video.MediaStoreOutputOptions;
-import androidx.camera.video.Quality;
-import androidx.camera.video.QualitySelector;
-import androidx.camera.video.VideoRecordEvent;
-import androidx.core.content.PermissionChecker;
-import androidx.lifecycle.LifecycleOwner;
 
-import java.nio.ByteBuffer;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-
-import android.os.Bundle;
 import android.Manifest;
-import android.net.Uri;
-import android.widget.ImageView;
-import androidx.camera.core.ImageCapture;
-import androidx.camera.core.ImageProxy;
-
 
 
 public class Camera extends AppCompatActivity implements View.OnClickListener {
@@ -177,9 +139,6 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
 
        imageCapture.setFlashMode(ImageCapture.FLASH_MODE_AUTO);
         flashLabel.setText("Auto Flash");
-
-
-
     }
 
 
@@ -240,7 +199,7 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
                         Toast.makeText(Camera.this, "Image saved successfully", Toast.LENGTH_SHORT).show();
 
 
-                        Intent intent = new Intent(Camera.this, com.example.tncapp.TrackCommute.captureOdometerS3.class);
+                        Intent intent = new Intent(Camera.this, captureOdometerS3.class);
                         intent.putExtra("FilePath",photoFilePath);
                         intent.putExtra("Mileage", Mileage);
                         startActivity(intent);

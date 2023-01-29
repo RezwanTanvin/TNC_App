@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:185721244307:android:144134bda56d88e9881b66",
+        "mobilesdk_app_id": "1:185721244307:android:3b68ce6991b62aee881b66",
         "android_client_info": {
-          "package_name": "com.example.tncapp"
+          "package_name": "com.ellerlabs.tncapp"
         }
       },
       "oauth_client": [

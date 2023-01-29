@@ -1,4 +1,4 @@
-package com.example.tncapp.TrackCommute;
+package com.ellerlabs.tncapp.TrackCommute;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.tncapp.MainActivity;
-import com.example.tncapp.R;
+import com.ellerlabs.tncapp.MainActivity;
+import com.ellerlabs.tncapp.R;
 
 public class collectCorrectOdometerS6 extends AppCompatActivity {
 

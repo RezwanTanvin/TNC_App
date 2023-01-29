@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.tncapp'
+    namespace 'com.ellerlabs.tncapp'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.tncapp"
+        applicationId 'com.ellerlabs.tncapp'
         minSdk 24
         targetSdk 33
         versionCode 1
@@ -53,4 +53,6 @@ dependencies {
 
     implementation "androidx.camera:camera-view:${camerax_version}"
     implementation "androidx.camera:camera-extensions:${camerax_version}"
+    implementation "androidx.camera:camera-core:1.3.0-alpha02"
+
 }

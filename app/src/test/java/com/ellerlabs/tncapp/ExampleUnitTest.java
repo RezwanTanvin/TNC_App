@@ -1,4 +1,4 @@
-package com.example.tncapp;
+package com.ellerlabs.tncapp;
 
 import org.junit.Test;
 

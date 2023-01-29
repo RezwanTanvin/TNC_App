@@ -1,22 +1,18 @@
-package com.example.tncapp.TrackCommute;
+package com.ellerlabs.tncapp.TrackCommute;
 
-import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.tncapp.R;
-import com.google.firebase.database.DatabaseReference;
+import com.ellerlabs.tncapp.R;
 
 import java.util.Date;
 
@@ -107,6 +103,15 @@ public class trackCommS2 extends AppCompatActivity {
     public void onStart(){
         super.onStart();
 
+        cameraIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(trackCommS2.this, ImagePreview.class);
+                intent.putExtra("FilePath", FilePath);
+                startActivity(intent);
+            }
+        });
+
         atv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -180,7 +185,7 @@ public class trackCommS2 extends AppCompatActivity {
         flag1 = true;
         enableDriveButton();
 
-        Intent intent = new Intent(trackCommS2.this, com.example.tncapp.TrackCommute.captureOdometerS3.class);
+        Intent intent = new Intent(trackCommS2.this, captureOdometerS3.class);
         if(FilePath!= null && mileage != null){
             intent.putExtra("FilePath",FilePath);
             intent.putExtra("Mileage",mileage);

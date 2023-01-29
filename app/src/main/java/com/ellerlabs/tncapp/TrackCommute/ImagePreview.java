@@ -1,4 +1,4 @@
-package com.example.tncapp.TrackCommute;
+package com.ellerlabs.tncapp.TrackCommute;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import com.example.tncapp.R;
+import com.ellerlabs.tncapp.R;
 
 
 public class ImagePreview extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.example.tncapp;
+package com.ellerlabs.tncapp;
 
 import android.content.Context;
 

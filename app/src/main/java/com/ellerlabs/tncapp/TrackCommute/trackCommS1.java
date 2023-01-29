@@ -1,20 +1,16 @@
-package com.example.tncapp.TrackCommute;
+package com.ellerlabs.tncapp.TrackCommute;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.tncapp.MainActivity;
-import com.example.tncapp.R;
-import com.google.firebase.FirebaseApp;
+import com.ellerlabs.tncapp.MainActivity;
+import com.ellerlabs.tncapp.R;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 public class trackCommS1 extends AppCompatActivity {
@@ -50,7 +46,7 @@ public class trackCommS1 extends AppCompatActivity {
     public void startTrackCommuteS2(View view){
 
        // date = new Date();
-        Intent intent = new Intent(this,com.example.tncapp.TrackCommute.trackCommS2.class);
+        Intent intent = new Intent(this, trackCommS2.class);
         //intent.putExtra("DATETIME_FLOW_STARTED",date.toString());
         startActivity(intent);
     }

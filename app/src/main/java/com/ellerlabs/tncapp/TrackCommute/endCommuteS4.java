@@ -1,4 +1,4 @@
-package com.example.tncapp.TrackCommute;
+package com.ellerlabs.tncapp.TrackCommute;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,7 +8,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.tncapp.R;
+import com.ellerlabs.tncapp.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,6 +19,8 @@ public class endCommuteS4 extends AppCompatActivity {
     TextView timer;
     long date ;
 
+    boolean timerRunning;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,25 +28,38 @@ public class endCommuteS4 extends AppCompatActivity {
 
         timer = findViewById(R.id.timeTV);
         date = new Date().getTime();
-
+        timerRunning = true;
         showLiveClock(timer);
 
     }
 
 
-    public void showLiveClock(final TextView clockTextView) {
+    public void showLiveClock(final TextView timer) {
         final Handler handler = new Handler();
         final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
         handler.post(new Runnable() {
             @Override
             public void run() {
-                clockTextView.setText(dateFormat.format(new Date()));
-                handler.postDelayed(this, 1000);
+
+                long elapsedTime = System.currentTimeMillis() - date;
+                int seconds = (int) (elapsedTime / 1000) % 60;
+                int minutes = (int) ((elapsedTime / (1000 * 60)) % 60);
+                int hours = (int) ((elapsedTime / (1000 * 60 * 60)) % 24);
+
+                String timeElapsed = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+                timer.setText(timeElapsed);
+
+                if (timerRunning) {
+                    handler.postDelayed(this, 1000);
+                }
             }
         });
     }
 
     public void goToS5(View view){
+
+        timerRunning= false;
         startActivity(new Intent(this,mileageConfirmationS5.class));
+
     }
 }
