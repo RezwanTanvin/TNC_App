@@ -23,9 +23,12 @@ public class S1_areYouDriver extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_track_comm_s1);
+        setContentView(R.layout.activity_are_you_driver_s1);
 
         db = openOrCreateDatabase("TrackCommuteInfo",MODE_PRIVATE,null);
+
+
+        db.execSQL("DROP TABLE IF EXISTS TrackCommuteInfo");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS TrackCommuteInfo (" +
                 "ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT ," +

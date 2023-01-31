@@ -5,15 +5,18 @@ import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.ACCESS_WIFI_STATE;
 import static android.Manifest.permission.CAMERA;
+import static android.Manifest.permission.POST_NOTIFICATIONS;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -28,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser user;
 
     TextView userName;
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
                     ACCESS_COARSE_LOCATION,
                     ACCESS_WIFI_STATE,
                     CAMERA,
+                    NOTIFICATION_SERVICE,
+                    POST_NOTIFICATIONS,
                     AUDIO_SERVICE,
                     WRITE_EXTERNAL_STORAGE,
                     READ_EXTERNAL_STORAGE,

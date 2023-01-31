@@ -1,15 +1,32 @@
 package com.ellerlabs.tncapp.TrackCommute;
 
+import static android.Manifest.permission.ACCESS_BACKGROUND_LOCATION;
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static android.Manifest.permission.ACCESS_WIFI_STATE;
+import static android.Manifest.permission.CAMERA;
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+
+
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.PowerManager;
 import android.view.View;
 import android.widget.TextView;
 
@@ -17,7 +34,6 @@ import com.ellerlabs.tncapp.R;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -30,7 +46,7 @@ import android.widget.Toast;
 import java.util.List;
 
 
-public class S4_endCommute extends AppCompatActivity {
+public class S4_timeAndDistanceTravelled extends AppCompatActivity {
 
     TextView timer,showDistance, GPSStrength;
     long date;
@@ -41,15 +57,15 @@ public class S4_endCommute extends AppCompatActivity {
     private LocationManager mLocationManager;
     private LocationListener mLocationListener;
     private SQLiteDatabase mSQLiteDatabase;
+    double distance,tempDistance, lati1, loni1,  lati2,  loni2;
 
-    double distance,tempDistance;
+    private PowerManager.WakeLock wakeLock;
 
-    double lati1, loni1,  lati2,  loni2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_end_commute_s4);
+        setContentView(R.layout.activity_track_time_distance_s4);
 
         timer = findViewById(R.id.timeTV);
         showDistance = findViewById(R.id.DistanceTV);
@@ -59,18 +75,37 @@ public class S4_endCommute extends AppCompatActivity {
 
         date = new Date().getTime();
         timerRunning = true;
-        showLiveClock(timer);
-
         mContext = this;
 
+
         LocationTracker(mContext);
+        startTracking();
+
+       // keepScreenOn(this);
 
     }
+
+//
+//
+//    public void keepScreenOn(Context context) {
+//        PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+//        wakeLock = powerManager.newWakeLock( PowerManager.PARTIAL_WAKE_LOCK, "myapp:wakeyy");
+//
+//        wakeLock.acquire();
+//    }
+//
+//    public void releaseScreenOn() {
+//        if (wakeLock != null) {
+//            wakeLock.release();
+//        }
+//    }
+
+
 
     public void onStart(){
         super.onStart();
 
-        startTracking();
+        showLiveClock(timer);
         getLocationListener();
 
     }
@@ -84,11 +119,12 @@ public class S4_endCommute extends AppCompatActivity {
 
     private void createTable() {
 
-        mSQLiteDatabase.execSQL("DROP TABLE locations ");
+        mSQLiteDatabase.execSQL("DROP TABLE IF EXISTS  locations ");
 
         mSQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS locations (" +
                 "latitude DOUBLE, " +
-                "longitude DOUBLE)");
+                "longitude DOUBLE, " +
+                "gpsStrength DOUBLE)");
     }
 
     public void startTracking() {
@@ -96,9 +132,9 @@ public class S4_endCommute extends AppCompatActivity {
             List<String> providers = mLocationManager.getProviders(true);
             for (String provider : providers) {
 
-                if (ActivityCompat.checkSelfPermission(S4_endCommute.this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+                if (ActivityCompat.checkSelfPermission(S4_timeAndDistanceTravelled.this, Manifest.permission.ACCESS_FINE_LOCATION) !=
                         PackageManager.PERMISSION_GRANTED &&
-                        ActivityCompat.checkSelfPermission(S4_endCommute.this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
+                        ActivityCompat.checkSelfPermission(S4_timeAndDistanceTravelled.this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
                                 PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
                     //    ActivityCompat#requestPermissions
@@ -110,44 +146,50 @@ public class S4_endCommute extends AppCompatActivity {
                     return;
                 }
 
-                mLocationManager.requestLocationUpdates(provider, 1000, 50, getLocationListener());
+                mLocationManager.requestLocationUpdates(provider, 2000, 50, getLocationListener());
             }
         }
     }
-
-
 
     private LocationListener getLocationListener() {
         if (mLocationListener == null) {
             mLocationListener = new LocationListener() {
                 @Override
                 public void onLocationChanged(Location location) {
-                    if (location != null) {
+                    if (location != null)
+                    {
                         double latitude = location.getLatitude();
                         double longitude = location.getLongitude();
-                        storeLocation(latitude, longitude);
-
-                        if (lati1 == 0.0)
+                        if (location.getAccuracy() < 30.0)
                         {
-                            lati1 = latitude;
-                            loni1 = longitude;
-                        }
-                        else{
-                            lati2 = latitude;
-                            loni2 = longitude;
+                            storeLocation(latitude, longitude,location.getAccuracy());
 
-                            tempDistance = distanceBetweenTwoCoordinates(lati1,loni1,lati2,loni2);
+                            if (lati1 == 0.0)
+                            {
+                                lati1 = latitude;
+                                loni1 = longitude;
+                            }
 
-                            lati1 = lati2;
-                            loni1 = loni2;
+                            else{
+                                lati2 = latitude;
+                                loni2 = longitude;
 
+                                tempDistance = distanceBetweenTwoCoordinates(lati1,loni1,lati2,loni2);
+
+                                lati1 = lati2;
+                                loni1 = loni2;
+
+                            }
+
+                            if  (!(Double.isNaN(tempDistance)))
+                            {
+                                distance = distance + tempDistance;
+                            }
+
+                            DecimalFormat df = new DecimalFormat("#.##");
+
+                            showDistance.setText(String.valueOf(df.format(distance)) + " KM");
                         }
-                        if  (!(Double.isNaN(tempDistance)))
-                        {
-                            distance = distance + tempDistance;
-                        }
-                        DecimalFormat df = new DecimalFormat("#.###");
-                        showDistance.setText(String.valueOf(df.format(distance)) + " KM");
 
                         GPSStrength.setText("GPS Strength: " + location.getAccuracy());
                     }
@@ -156,23 +198,23 @@ public class S4_endCommute extends AppCompatActivity {
                 @Override
                 public void onStatusChanged(String provider, int status, Bundle extras) {
                 }
-
                 @Override
                 public void onProviderEnabled(String provider) {
-                }
 
+                }
                 @Override
                 public void onProviderDisabled(String provider) {
+                    Toast.makeText(mContext, "Location Services turned off, please enable location services to continue using app.", Toast.LENGTH_SHORT).show();
                 }
             };
         }
         return mLocationListener;
     }
 
-    private void storeLocation(double latitude, double longitude) {
+    private void storeLocation(double latitude, double longitude,double accuracy) {
         try {
-            mSQLiteDatabase.execSQL("INSERT INTO locations (latitude, longitude) VALUES ('" + latitude + "', '" + longitude + "');");
-            //Toast.makeText(mContext, "Location stored in database", Toast.LENGTH_SHORT).show();
+            mSQLiteDatabase.execSQL("INSERT INTO locations (latitude, longitude, gpsStrength) VALUES ('" + latitude + "', '" + longitude + "', '" + accuracy + "');");
+
         } catch (SQLiteException e) {
             e.printStackTrace();
         }
@@ -227,7 +269,33 @@ public class S4_endCommute extends AppCompatActivity {
 
         timerRunning= false;
         stopTracking();
-        startActivity(new Intent(S4_endCommute.this, googelMapsData.class));
+        startActivity(new Intent(S4_timeAndDistanceTravelled.this, googelMapsData.class));
+
 
     }
+
+
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//
+//        Intent intent = new Intent(this, MyService.class);
+//     //   intent.putExtra("distance",distance);
+//     //   intent.putExtra("time",date);
+//        startService(intent);
+//
+//
+//    }
+//
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        Intent intentFromForeGround = getIntent();
+//        if (intentFromForeGround != null)
+//        {
+//            distance = intentFromForeGround.getDoubleExtra("distance", 0.0);
+//            date = intentFromForeGround.getLongExtra("date", 0);
+//        }
+//    }
+
 }

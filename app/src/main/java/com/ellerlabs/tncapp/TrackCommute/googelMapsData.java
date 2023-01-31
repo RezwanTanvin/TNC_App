@@ -84,6 +84,12 @@ public class googelMapsData extends FragmentActivity implements OnMapReadyCallba
             mMap.addPolyline(options);
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(points.get(0), 16));
 
+            LatLng Start = points.get(0);
+            LatLng Finish = points.get(points.size()-1);
+
+            mMap.addMarker(new MarkerOptions().position(Start).title("Start"));
+            //mMap.addMarker(new MarkerOptions().position(Finish).title("End"));
+           // mMap.animateCamera(CameraUpdateFactory.zoomTo(20), 3000, null);
         }
     }
 }

@@ -12,6 +12,8 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -59,7 +61,7 @@
             android:name=".TrackCommute.S5_mileageConfirmation"
             android:exported="false" />
         <activity
-            android:name=".TrackCommute.S4_endCommute"
+            android:name=".TrackCommute.S4_timeAndDistanceTravelled"
             android:exported="false" />
         <activity
             android:name=".TrackCommute.S3_captureOdometer"

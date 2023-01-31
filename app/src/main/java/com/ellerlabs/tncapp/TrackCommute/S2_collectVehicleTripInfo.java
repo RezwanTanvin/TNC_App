@@ -43,7 +43,7 @@ public class S2_collectVehicleTripInfo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_track_comm_s2);
+        setContentView(R.layout.activity_collect_vehicle_trip_info_s2);
 
         atv = findViewById(R.id.atvBtn);
         atv.setBackgroundColor(Color.DKGRAY);
@@ -198,7 +198,7 @@ public class S2_collectVehicleTripInfo extends AppCompatActivity {
     {
         createEntryforCommutor();
 
-        startActivity(new Intent(this, S4_endCommute.class));
+        startActivity(new Intent(this, S4_timeAndDistanceTravelled.class));
     }
 
     public void enableDriveButton(){

@@ -31,8 +31,10 @@ import java.util.Date;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.camera.lifecycle.ProcessCameraProvider;
@@ -54,6 +56,8 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
     String Mileage;
     TextView flashLabel;
 
+    ProgressBar progressBar;
+
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
 
@@ -67,16 +71,20 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
         //videoCapture = findViewById(R.id.video_capture_button);
         flashToogle = findViewById(R.id.flashToogle);
         flashLabel = findViewById(R.id.flashOnOff);
+        progressBar = findViewById(R.id.progressBar);
 
         picCapture.setOnClickListener(this);
         flashToogle.setOnClickListener(this);
         flashLabel.setOnClickListener(this);
+
 
         intent = getIntent();
 
         if ( intent.getStringExtra("Mileage")!= null) {
             Mileage = intent.getStringExtra("Mileage");
         }
+
+
 
             //videoCapture.setOnClickListener(this);
 
@@ -145,6 +153,7 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.image_capture_button:
+                progressBar.setVisibility(view.VISIBLE);
                 capturePhoto();
                 break;
            // case R.id.video_capture_button:
@@ -211,7 +220,9 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
                         Toast.makeText(Camera.this, "Image failed to save. Error : " + exception.toString() , Toast.LENGTH_SHORT).show();
 
                     }
+
                 });
+        progressBar.setVisibility(View.INVISIBLE);
 
     }
 
