@@ -25,7 +25,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TNCApp"
         tools:targetApi="31">
-
+        <service
+            android:name=".TrackCommute.S4_S_distanceCalculator"
+            android:enabled="true"
+            android:exported="true"></service>
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 

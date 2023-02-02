@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             }, PERMISSION_REQUEST_CODE);
         };
 
-        String UID = user.getUid();
+        //String UID = user.getUid();
         userName.setText("Hello\n" + user.getDisplayName());
 
 
