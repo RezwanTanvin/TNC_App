@@ -27,8 +27,15 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 
 import com.ellerlabs.tncapp.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DecimalFormat;
 import java.util.List;
+
+
 
 public class S4_S_distanceCalculator extends Service {
 
@@ -41,14 +48,15 @@ public class S4_S_distanceCalculator extends Service {
     double loni1;
     double lati2;
     double loni2;
-
-
-    private Thread backgroundThread;
-    private boolean isRunning = false;
-
-
     private Looper serviceLooper;
     private ServiceHandler serviceHandler;
+
+    private FirebaseAuth mAuth;
+    private FirebaseUser user;
+    private FirebaseDatabase database;
+    DatabaseReference db;
+
+    int UID;
 
     // Handler that receives messages from the thread
     private final class ServiceHandler extends Handler {
@@ -61,9 +69,8 @@ public class S4_S_distanceCalculator extends Service {
 
 
 
-            LocationTracker(S4_S_distanceCalculator.this);
-            startTracking();
-            getLocationListener();
+
+
 
 
             // Stop the service using the startId, so that we don't stop
@@ -72,23 +79,32 @@ public class S4_S_distanceCalculator extends Service {
         }
     }
 
+    HandlerThread thread;
     @Override
     public void onCreate() {
         // Start up the thread running the service. Note that we create a
         // separate thread because the service normally runs in the process's
         // main thread, which we don't want to block. We also make it
         // background priority so CPU-intensive work doesn't disrupt our UI.
-
+        UID = 0;
         distance = 0.0;
         lati1 = 0.0;
 
-        HandlerThread thread = new HandlerThread("ServiceStartArguments",
-                Process.THREAD_PRIORITY_BACKGROUND);
-        thread.start();
+//        thread = new HandlerThread("ServiceStartArguments",
+//                Process.THREAD_PRIORITY_BACKGROUND);
+//        thread.start();
+//
+//        // Get the HandlerThread's Looper and use it for our Handler
+//        serviceLooper = thread.getLooper();
+//        serviceHandler = new ServiceHandler(serviceLooper);
 
-        // Get the HandlerThread's Looper and use it for our Handler
-        serviceLooper = thread.getLooper();
-        serviceHandler = new ServiceHandler(serviceLooper);
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+        database = FirebaseDatabase.getInstance();
+
+        db = database.getReference("Commute Data").child(user.getUid()).child("GPS Data");
+        db.removeValue();
+
     }
 
 
@@ -98,14 +114,18 @@ public class S4_S_distanceCalculator extends Service {
         createNotificationChannel();
         startForeground(1,builder());
 
+        LocationTracker(S4_S_distanceCalculator.this);
+        startTracking();
+        getLocationListener();
+
         Toast.makeText(this, "GPS Tracking Active", Toast.LENGTH_SHORT).show();
 
         // For each start request, send a message to start a job and deliver the
         // start ID so we know which request we're stopping when we finish the job
 
-        Message msg = serviceHandler.obtainMessage();
-        msg.arg1 = startId;
-        serviceHandler.sendMessage(msg);
+//        Message msg = serviceHandler.obtainMessage();
+//        msg.arg1 = startId;
+//        serviceHandler.sendMessage(msg);
 
 
         // If we get killed, after returning from here, restart
@@ -213,6 +233,16 @@ public class S4_S_distanceCalculator extends Service {
                             }
 
 
+                            UID++;
+
+                            DecimalFormat df = new DecimalFormat("#.#####");
+
+                            db.child(String.valueOf(UID)).child("Lat").setValue(latitude);
+                            db.child(String.valueOf(UID)).child("Long").setValue(longitude );
+                            db.child(String.valueOf(UID)).child("Strength").setValue(location.getAccuracy() );
+                            db.child(String.valueOf(UID)).child("Distance").setValue(String.valueOf(df.format(distance) + " KM"));
+
+
                         }
 
                         //GPSStrength.setText("GPS Strength: " + location.getAccuracy());
@@ -275,6 +305,9 @@ public class S4_S_distanceCalculator extends Service {
         return null;
     }
 
-
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+       mLocationManager.removeUpdates(mLocationListener);
+    }
 }

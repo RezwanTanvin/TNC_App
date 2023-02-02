@@ -172,7 +172,7 @@ public class LoginActivity extends AppCompatActivity {
 
         }
 
-        public void goToSignUp (View view) {
+    public void goToSignUp (View view) {
         startActivity(new Intent(this, SignUp.class));
         }
 
