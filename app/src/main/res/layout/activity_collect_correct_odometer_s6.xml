@@ -29,7 +29,7 @@
         app:layout_constraintTop_toBottomOf="@+id/title7" />
 
     <Button
-        android:id="@+id/startDrivignBtn2"
+        android:id="@+id/submitBtn"
         android:layout_width="257dp"
         android:layout_height="83dp"
         android:layout_marginTop="88dp"
@@ -62,4 +62,15 @@
         app:layout_constraintEnd_toEndOf="@+id/textView14"
         app:layout_constraintStart_toStartOf="@+id/textView14"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="166dp"
+        android:layout_height="166dp"
+        android:rotation="90"
+        app:layout_constraintBottom_toTopOf="@+id/submitBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mileageAtStarteditText2"
+        app:srcCompat="@drawable/roundedcorner" />
 </androidx.constraintlayout.widget.ConstraintLayout>

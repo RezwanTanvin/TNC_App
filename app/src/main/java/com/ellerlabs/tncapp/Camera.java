@@ -14,6 +14,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.DrawableWrapper;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -24,6 +30,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.ellerlabs.tncapp.TrackCommute.S3_captureOdometer;
+import com.ellerlabs.tncapp.TrackCommute.S6_collectCorrectOdometer;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.io.File;
@@ -57,6 +64,9 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
     TextView flashLabel;
 
     ProgressBar progressBar;
+    int id;
+
+    boolean fromS6;
 
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
@@ -84,6 +94,34 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
             Mileage = intent.getStringExtra("Mileage");
         }
 
+        if(intent.getStringExtra("PathFrom")!=null){
+
+        if (intent.getStringExtra("PathFrom").contains("S6"))
+        {
+            fromS6 = true;
+        }}
+
+        id = intent.getIntExtra("ID",id);
+
+        picCapture.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event)
+            {
+                if (event.getAction() == MotionEvent.ACTION_DOWN){
+                    Drawable drawable = ContextCompat.getDrawable(com.ellerlabs.tncapp.Camera.this, R.drawable.camera_button_gray);
+                    picCapture.setForeground(drawable);
+                }
+
+                else if(event.getAction() == MotionEvent.ACTION_UP)
+                {
+                    Drawable drawable = ContextCompat.getDrawable(com.ellerlabs.tncapp.Camera.this, R.drawable.camera_button);
+                    picCapture.setForeground(drawable);
+
+                }
+
+                return false;
+            }
+        });
 
 
             //videoCapture.setOnClickListener(this);
@@ -100,8 +138,7 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
                     WRITE_EXTERNAL_STORAGE,
                     READ_EXTERNAL_STORAGE,
                     }, PERMISSION_REQUEST_CODE);
-        };
-
+        }
 
 
         cameraProviderListenableFuture = ProcessCameraProvider.getInstance(this);
@@ -149,11 +186,15 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
     }
 
 
+
+
+
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.image_capture_button:
-                progressBar.setVisibility(view.VISIBLE);
+                progressBar.setVisibility(View.VISIBLE);
+                picCapture.setEnabled(false);
                 capturePhoto();
                 break;
            // case R.id.video_capture_button:
@@ -206,12 +247,19 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
                     public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
                         Toast.makeText(Camera.this, "Image saved successfully", Toast.LENGTH_SHORT).show();
 
-
-                        Intent intent = new Intent(Camera.this, S3_captureOdometer.class);
-                        intent.putExtra("FilePath",photoFilePath);
-                        intent.putExtra("Mileage", Mileage);
-                        startActivity(intent);
-
+                        if(fromS6){
+                            Intent intent = new Intent(Camera.this, S6_collectCorrectOdometer.class);
+                            intent.putExtra("FilePath",photoFilePath);
+                            intent.putExtra("Mileage", Mileage);
+                            intent.putExtra("ID",id);
+                            startActivity(intent);
+                        }
+                        else {
+                            Intent intent = new Intent(Camera.this, S3_captureOdometer.class);
+                            intent.putExtra("FilePath", photoFilePath);
+                            intent.putExtra("Mileage", Mileage);
+                            startActivity(intent);
+                        }
                     }
 
                     @Override
@@ -222,7 +270,6 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
                     }
 
                 });
-        progressBar.setVisibility(View.INVISIBLE);
 
     }
 

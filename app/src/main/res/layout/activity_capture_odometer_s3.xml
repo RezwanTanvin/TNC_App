@@ -55,7 +55,7 @@
         android:layout_width="0dp"
         android:layout_height="83dp"
         android:layout_marginTop="104dp"
-        android:onClick="goToS2"
+        android:onClick="goToS2orS6"
         android:text="Submit"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toEndOf="@+id/textView4"

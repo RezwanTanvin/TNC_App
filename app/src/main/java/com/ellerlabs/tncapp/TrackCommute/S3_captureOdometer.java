@@ -30,7 +30,7 @@ public class S3_captureOdometer extends AppCompatActivity {
    String FilePath;
    String mileageFromCameraClass;
    TextView header;
-
+   String Mileage;
     //private static final int CAMERA_REQUEST = 1888;
 
     @Override
@@ -45,12 +45,28 @@ public class S3_captureOdometer extends AppCompatActivity {
         submitBtn.setEnabled(false);
         takePic.setEnabled(false);
         header = findViewById(R.id.textView4);
+        Mileage = "";
+
+
     }
+    boolean fromS2,fromS6;
+    String pathFrom;
 
     public void onStart(){
         super.onStart();
 
+        fromS2 = false;
+        fromS6 = false;
+
         intent = getIntent();
+
+        pathFrom = intent.getStringExtra("pathFrom");
+        if(pathFrom == "S6"){
+            fromS6 = true;
+        }
+        else{
+            fromS2 = true;
+        }
 
         if ( intent.getStringExtra("FilePath")!= null)
         {
@@ -74,6 +90,8 @@ public class S3_captureOdometer extends AppCompatActivity {
             mileageFromCameraClass = intent.getStringExtra("Mileage");
 
             mileage.setText(mileageFromCameraClass);
+            Mileage = mileageFromCameraClass;
+
             submitBtn.setEnabled(true);
         }
 
@@ -122,12 +140,15 @@ public class S3_captureOdometer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 {
+
                     if(mileage != null) {
-                        mileage.getText().toString().trim();
+                        Mileage = mileage.getText().toString().trim();
                     }
 
                     Intent intent = new Intent(S3_captureOdometer.this, Camera.class);
-                    intent.putExtra("Mileage",mileage.getText().toString().trim());
+
+                    intent.putExtra("Mileage",Mileage);
+
                     startActivity(intent);
 
                 }
@@ -138,31 +159,31 @@ public class S3_captureOdometer extends AppCompatActivity {
     }
 
 
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        if (requestCode == REQUEST_CODE_PERMISSIONS) {
-//            if (allPermissionsGranted()) {
-//                startCamera();
-//            } else {
-//                Toast.makeText(this, "Permissions not granted by the user.", Toast.LENGTH_SHORT).show();
-//                finish();
-//            }
-//        }
-//    }
 
 
 
 
-    public void goToS2(View view) //This is called by the submit button.
+    public void goToS2orS6(View view) //This is called by the submit button.
     {
         if(mileage != null) {
             mileage.getText().toString().trim();
         }
 
-        Intent intent = new Intent(this, S2_collectVehicleTripInfo.class);
-        intent.putExtra("Mileage",mileage.getText().toString().trim());
+        Intent intent;
+
+        if(fromS2)
+        {
+            intent = new Intent(this, S2_collectVehicleTripInfo.class);
+        }
+        else
+        {
+            intent = new Intent(this, S6_collectCorrectOdometer.class);
+        }
+
+        intent.putExtra("Mileage",Mileage);
         intent.putExtra("FilePath",FilePath);
         startActivity(intent);
+
     }
 
 }

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ public class S2_collectVehicleTripInfo extends AppCompatActivity {
     Button overNightTrip;
 
     Button driveNow;
+    Date startedDrivingAt;
 
     Boolean flag1;
     Boolean flag2;
@@ -34,11 +36,12 @@ public class S2_collectVehicleTripInfo extends AppCompatActivity {
     ContentValues values;
 
     Intent intent ;
-    String date;
 
     String mileage;
     ImageView cameraIcon;
     String FilePath;
+    Boolean hasFilePath;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,9 +87,13 @@ public class S2_collectVehicleTripInfo extends AppCompatActivity {
         if ( intent.getStringExtra("Mileage")!= null)
         {
             mileage = intent.getStringExtra("Mileage");
+
             truck.setBackgroundColor(Color.WHITE);
             truck.setTextColor(Color.BLACK);
+
             values.put("VEHICLE_TYPE","Truck");
+            values.put("STARTING_MILEAGE",mileage);
+
             flag1 = true;
             cameraIcon.setVisibility(View.VISIBLE);
 
@@ -94,6 +101,7 @@ public class S2_collectVehicleTripInfo extends AppCompatActivity {
         if ( intent.getStringExtra("FilePath")!= null)
         {
             FilePath = intent.getStringExtra("FilePath");
+            hasFilePath = true;
         }
         
         db = openOrCreateDatabase("TrackCommuteInfo",MODE_PRIVATE,null);
@@ -187,18 +195,12 @@ public class S2_collectVehicleTripInfo extends AppCompatActivity {
         enableDriveButton();
 
         Intent intent = new Intent(S2_collectVehicleTripInfo.this, S3_captureOdometer.class);
+
         if(FilePath!= null && mileage != null){
             intent.putExtra("FilePath",FilePath);
             intent.putExtra("Mileage",mileage);
         }
         startActivity(intent);
-    }
-
-    public void gotToS4(View view) // Start driving button onClick calls this
-    {
-        createEntryforCommutor();
-
-        startActivity(new Intent(this, S4_timeAndDistanceTravelled.class));
     }
 
     public void enableDriveButton(){
@@ -207,11 +209,19 @@ public class S2_collectVehicleTripInfo extends AppCompatActivity {
         }
     }
 
-    public void createEntryforCommutor(){
-        Date startedDrivingAt = new Date();
-       // values.put("DATETIME_FLOW_STARTED", date);
+    public void createEntryForCommutor(){
+        startedDrivingAt = new Date();
+        if(FilePath!= null && mileage != null)
+        {
+            values.put("ODOMETER_IMAGE_URI",FilePath);
+            values.put("STARTING_MILEAGE",mileage);
+        }
+        else{
+            values.put("ODOMETER_IMAGE_URI","N/A");
+            values.put("STARTING_MILEAGE","N/A");
+        }
+
         values.put("STARTED_DRIVING_AT_TIME", startedDrivingAt.toString());
-        values.put("STARTING_MILEAGE", "N/A");
 
         try {
             db.insert("TrackCommuteInfo",null,values);
@@ -220,5 +230,31 @@ public class S2_collectVehicleTripInfo extends AppCompatActivity {
             Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
         }
     }
+
+    public void gotToS4(View view) // Start driving button onClick calls this
+    {
+        int cellValue = 0;
+        createEntryForCommutor();
+        Cursor cursor = db.rawQuery("SELECT ID FROM TrackCommuteInfo\n" +
+                "WHERE ID = (SELECT MAX(id) FROM TrackCommuteInfo);", null);
+
+        if (cursor.moveToFirst()) {
+            int columnIndex = cursor.getColumnIndex("ID");
+            cellValue = cursor.getInt(columnIndex);
+
+        }
+        cursor.close();
+
+        Intent intent = new Intent(this, S4_timeAndDistanceTravelled.class);
+
+        intent.putExtra("ID", cellValue);
+        intent.putExtra("Date",startedDrivingAt.getTime());
+        intent.putExtra("Mileage",mileage);
+
+        db.close();
+
+        startActivity(intent);
+    }
+
 
 }

@@ -12,9 +12,7 @@
         android:layout_height="match_parent"
         android:foreground="@drawable/roundedcorner"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" >
-
-    </androidx.camera.view.PreviewView>
+        tools:layout_editor_absoluteY="0dp" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -33,6 +31,7 @@
         android:layout_height="104dp"
         android:layout_marginBottom="50dp"
         android:background="#00FFFFFF"
+        android:backgroundTintMode="add"
         android:elevation="2dp"
         android:foreground="@drawable/camera_button"
         app:layout_constraintBottom_toBottomOf="parent"

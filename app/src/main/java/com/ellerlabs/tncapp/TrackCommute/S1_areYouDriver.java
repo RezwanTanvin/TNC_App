@@ -37,10 +37,11 @@ public class S1_areYouDriver extends AppCompatActivity {
                 "STARTING_MILEAGE varchar(32)," +
                 "ODOMETER_IMAGE_URI varchar(32)," +
                 "STARTED_DRIVING_AT_TIME varchar(32)," +
-                "ENDED_DRIVING_AT_TIME varchar(32)," +
+                "DRIVE_TIME varchar(32)," +
                 "TOTAL_MILES_DRIVEN_FROM_GPS varchar(32)," +
+                "SQL_TABLE_NAME varchar(32)," +
                 "OVERRIDE_MILEAGE varchar(32)," +
-                "FINAL_MILEAGE varchar(32))");
+                "OVERRIDE_MILEAGE_URI varchar(32))");
 
     }
 
