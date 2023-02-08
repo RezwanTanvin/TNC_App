@@ -219,6 +219,8 @@ public class S2_collectVehicleTripInfo extends AppCompatActivity {
         else{
             values.put("ODOMETER_IMAGE_URI","N/A");
             values.put("STARTING_MILEAGE","N/A");
+            values.put("OVERRIDE_MILEAGE","N/A");
+            values.put("OVERRIDE_MILEAGE_URI","N/A");
         }
 
         values.put("STARTED_DRIVING_AT_TIME", startedDrivingAt.toString());
@@ -256,5 +258,9 @@ public class S2_collectVehicleTripInfo extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, "Please avoid pressing the back button, this will corrupt the data collected.", Toast.LENGTH_LONG).show();
+    }
 
 }

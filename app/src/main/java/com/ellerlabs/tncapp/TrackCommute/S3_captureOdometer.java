@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ellerlabs.tncapp.Camera;
 import com.ellerlabs.tncapp.ImagePreview;
@@ -71,7 +72,7 @@ public class S3_captureOdometer extends AppCompatActivity {
         if ( intent.getStringExtra("FilePath")!= null)
         {
             FilePath = intent.getStringExtra("FilePath");
-
+            thumbnail.setVisibility(View.VISIBLE);
             Bitmap bitmap = BitmapFactory.decodeFile(FilePath);
             thumbnail.setEnabled(true);
             thumbnail.setImageBitmap(bitmap);
@@ -184,6 +185,12 @@ public class S3_captureOdometer extends AppCompatActivity {
         intent.putExtra("FilePath",FilePath);
         startActivity(intent);
 
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, "Please avoid pressing the back button, this will corrupt the data collected.", Toast.LENGTH_LONG).show();
     }
 
 }

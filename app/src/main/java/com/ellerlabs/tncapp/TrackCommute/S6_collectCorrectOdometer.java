@@ -1,5 +1,6 @@
 package com.ellerlabs.tncapp.TrackCommute;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
@@ -21,8 +22,20 @@ import com.ellerlabs.tncapp.Camera;
 import com.ellerlabs.tncapp.ImagePreview;
 import com.ellerlabs.tncapp.MainActivity;
 import com.ellerlabs.tncapp.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
-
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 
 public class S6_collectCorrectOdometer extends AppCompatActivity {
@@ -128,6 +141,7 @@ public class S6_collectCorrectOdometer extends AppCompatActivity {
                 dataEntry.setText(manualInputMileageString);
         }
 
+        //TODO: Add ability for user to click on picture and choose to zoom in and out like the other screen.
         if ( intent.getStringExtra("FilePath")!= null)
         {
             Bitmap bitmap = BitmapFactory.decodeFile(filepath);
@@ -152,7 +166,9 @@ public class S6_collectCorrectOdometer extends AppCompatActivity {
                    db.update("TrackCommuteInfo",values,"ID = ?",new String[]{String.valueOf(rowID)});
 
                 Toast.makeText(S6_collectCorrectOdometer.this, "Saved successfully. Thank you for logging your commute.", Toast.LENGTH_SHORT).show();
-                
+
+                startActivity(new Intent(com.ellerlabs.tncapp.TrackCommute.S6_collectCorrectOdometer.this, com.ellerlabs.tncapp.TrackCommute.uploadAllCommuteDataToFirebase.class));
+
                }
                catch(Exception e)
                {
@@ -163,13 +179,9 @@ public class S6_collectCorrectOdometer extends AppCompatActivity {
 
     }
 
-
-
-
-
-
-    public void goToMainScreen(View view){
-
-        startActivity(new Intent(this, MainActivity.class));
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, "Please avoid pressing the back button, this will corrupt the data collected.", Toast.LENGTH_LONG).show();
     }
+
 }

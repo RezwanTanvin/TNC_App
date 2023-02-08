@@ -221,7 +221,7 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
                 }
         }
     }
-
+    //TODO : need to add capability for user to review photo right after taking it.
     private void capturePhoto() {
 
 

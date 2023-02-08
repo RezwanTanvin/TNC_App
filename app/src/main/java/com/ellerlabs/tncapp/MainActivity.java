@@ -16,9 +16,12 @@ import androidx.core.app.ActivityCompat;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ellerlabs.tncapp.TrackCommute.S1_areYouDriver;
@@ -31,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser user;
 
     TextView userName;
+
+    ImageView imageView1,imageView2,imageView3;
     @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +61,28 @@ public class MainActivity extends AppCompatActivity {
                     READ_EXTERNAL_STORAGE,
             }, PERMISSION_REQUEST_CODE);
         };
+        //TODO : Will not work for multiple users on a device when loggin in offline.
 
-        //String UID = user.getUid();
         userName.setText("Hello\n" + user.getDisplayName());
+
+
+
+        imageView1 = findViewById(R.id.trackCommuteImage);
+        imageView2 = findViewById(R.id.harvestProductImage);
+        imageView3 = findViewById(R.id.processHarvestImage);
+
+        imageView1.setClipToOutline(true);
+        imageView2.setClipToOutline(true);
+        imageView3.setClipToOutline(true);
+
+
+        Bitmap bitmap1 = BitmapFactory.decodeResource(getResources(), R.drawable.track_commmute_logo);
+        Bitmap bitmap2 = BitmapFactory.decodeResource(getResources(), R.drawable.harvest_product_image);
+        Bitmap bitmap3 = BitmapFactory.decodeResource(getResources(), R.drawable.process_harvest_logo);
+
+        imageView1.setImageBitmap(bitmap1);
+        imageView2.setImageBitmap(bitmap2);
+        imageView3.setImageBitmap(bitmap3);
 
 
 

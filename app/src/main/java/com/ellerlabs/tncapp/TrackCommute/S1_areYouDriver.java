@@ -1,5 +1,6 @@
 package com.ellerlabs.tncapp.TrackCommute;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import com.ellerlabs.tncapp.MainActivity;
 import com.ellerlabs.tncapp.R;
+
 
 import java.util.Date;
 
@@ -58,7 +60,11 @@ public class S1_areYouDriver extends AppCompatActivity {
 
     public void goToMainScreen(View view){
         Toast.makeText(this, "You are not required to track your vehicle commute.", Toast.LENGTH_LONG).show();
+
         startActivity(new Intent(this, MainActivity.class));
     }
+
+
+
 
 }

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#192F2F"
+    android:background="#F1EAEA"
+    android:backgroundTint="#192F2F"
     tools:context="com.ellerlabs.tncapp.MainActivity">
 
     <TextView
@@ -62,7 +63,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:background="@drawable/roundedcorner"
+        android:background="@drawable/roundedcorner_buttons"
         android:text="Start Task"
         android:textColor="#050000"
         app:layout_constraintStart_toStartOf="@+id/Hi"
@@ -75,7 +76,7 @@
         android:layout_height="46dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        android:background="@drawable/roundedcorner"
+        android:background="@drawable/roundedcorner_for_imageview"
         android:backgroundTint="#050000"
         android:text="In Progress"
         app:layout_constraintStart_toEndOf="@+id/startTaskBtn"
@@ -85,34 +86,34 @@
         android:id="@+id/trackCommuteImage"
         android:layout_width="110dp"
         android:layout_height="110dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/roundedcorner_for_imageview"
+        android:elevation="5dp"
         android:onClick="startTrackCommute"
+
         app:layout_constraintEnd_toEndOf="@+id/startTaskBtn"
         app:layout_constraintStart_toStartOf="@+id/startTaskBtn"
-        app:layout_constraintTop_toBottomOf="@+id/startTaskBtn"
-        app:srcCompat="@drawable/square_box" />
+        app:layout_constraintTop_toBottomOf="@+id/startTaskBtn" />
 
     <ImageView
         android:id="@+id/harvestProductImage"
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_marginTop="24dp"
-        android:background="@drawable/roundedcorner"
-        android:backgroundTint="#66000000"
+        android:background="@drawable/roundedcorner_for_imageview"
+        android:elevation="5dp"
         app:layout_constraintStart_toStartOf="@+id/trackCommuteImage"
-        app:layout_constraintTop_toBottomOf="@+id/trackCommuteImage"
-        tools:srcCompat="@drawable/square_box" />
+        app:layout_constraintTop_toBottomOf="@+id/trackCommuteImage" />
 
     <ImageView
         android:id="@+id/processHarvestImage"
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_marginTop="24dp"
-        android:background="@drawable/roundedcorner"
-        android:backgroundTint="#66000000"
+        android:background="@drawable/roundedcorner_for_imageview"
+        android:elevation="5dp"
         app:layout_constraintStart_toStartOf="@+id/harvestProductImage"
-        app:layout_constraintTop_toBottomOf="@+id/harvestProductImage"
-        tools:srcCompat="@drawable/square_box" />
+        app:layout_constraintTop_toBottomOf="@+id/harvestProductImage" />
 
     <TextView
         android:id="@+id/trackCommuteLabel"

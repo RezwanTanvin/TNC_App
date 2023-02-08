@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
@@ -22,11 +23,14 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.ellerlabs.tncapp.R;
+import com.ellerlabs.tncapp.TrackCommute.LocationDataObj;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -79,8 +83,6 @@ public class LoginActivity extends AppCompatActivity {
 
                             loadingProgressBar.setVisibility(View.GONE);
 
-                            Log.d(TAG, "signInWithEmail:success");
-
                             FirebaseUser currentuser = mAuth.getCurrentUser();
                             updateUI(currentuser);
 
@@ -97,7 +99,6 @@ public class LoginActivity extends AppCompatActivity {
                                         currentuser.getDisplayName().trim() + "','" +
                                         username.trim() + "','" + password + "');"
                                         );
-                               // db.insert("LogInInfo",null,values);
                             }
                             catch (Exception e){
                                 Log.d(TAG, e.toString());
@@ -109,15 +110,50 @@ public class LoginActivity extends AppCompatActivity {
 
                             loadingProgressBar.setVisibility(View.GONE);
 
+                            //We will store the entire table data into our custom built object arrayList.
+                            ArrayList<LogInDataObj> objArrayList = new ArrayList<>();
 
-                            Toast.makeText(LoginActivity.this, "Authentication failed. " + task.getException()
-                                            .getMessage(),
-                                    Toast.LENGTH_LONG).show();
+                            Cursor cr = db.rawQuery("SELECT * FROM LogInInfo",null);
+                            if(cr.moveToFirst()) {
+                                do {
+                                    ArrayList<String> row = new ArrayList<>();
 
-                            updateUI(null);
+                                    for (int i = 0; i < cr.getColumnCount(); i++) {
+                                        row.add(cr.getString(i));
+                                    }
+
+                                    LogInDataObj obj = new LogInDataObj(row);
+                                    objArrayList.add(obj);
+                                }
+                                while (cr.moveToNext());
+                            }
+
+                            boolean logInInfoMatched = false;
+
+                            for (LogInDataObj obj:objArrayList)
+                                { if (username.equals(obj.email) && password.equals(obj.password) )
+                                     {
+                                        logInInfoMatched = true;
+                                     }
+
+                                }
+                            if (logInInfoMatched){
+                                Toast.makeText(LoginActivity.this, "Logged in offline using previously saved log in details. Some fucntions may be unavilable.",Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                            }
+                            else {
+
+                                Toast.makeText(LoginActivity.this, "Authentication failed. " + task.getException()
+                                                .getMessage(),
+                                        Toast.LENGTH_LONG).show();
+
+                                updateUI(null);
+                            }
                         }
                     }
                 });
+
+
             }
         });
 

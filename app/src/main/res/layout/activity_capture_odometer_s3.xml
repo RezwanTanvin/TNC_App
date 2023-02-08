@@ -70,11 +70,13 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/roundedcorner_for_imageview"
+        android:elevation="5dp"
         android:rotation="90"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/submitBtn1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mileageAtStarteditText"
-        app:srcCompat="@drawable/roundedcorner" />
+        app:layout_constraintTop_toBottomOf="@+id/mileageAtStarteditText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

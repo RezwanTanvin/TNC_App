@@ -126,7 +126,6 @@ public class S4_timeAndDistanceTravelled extends AppCompatActivity {
                 updateTripCommuteDatabase();
 
 
-
                 Intent intent = new Intent (S4_timeAndDistanceTravelled.this, S5_mileageConfirmation.class);
 
                 if (mileage != null ) {
@@ -140,7 +139,8 @@ public class S4_timeAndDistanceTravelled extends AppCompatActivity {
                 else{
                     Toast.makeText(S4_timeAndDistanceTravelled.this, "Saved successfully. Thank you for logging your commute.", Toast.LENGTH_SHORT).show();
 
-                    startActivity(new Intent(com.ellerlabs.tncapp.TrackCommute.S4_timeAndDistanceTravelled.this, MainActivity.class));
+                    startActivity(new Intent(com.ellerlabs.tncapp.TrackCommute.S4_timeAndDistanceTravelled.this,
+                            com.ellerlabs.tncapp.TrackCommute.uploadAllCommuteDataToFirebase.class));
                 }
             }
         });
@@ -157,14 +157,10 @@ public class S4_timeAndDistanceTravelled extends AppCompatActivity {
 
        // Need to figure out a way to make sure we are creating TrackCommute ID specific table for locations in case more than one record is created.
 
-        mSQLiteDatabase.execSQL("drop table IF EXISTS  permLocationTable_1");
-
         mSQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS permLocationTable_1  (" +
                 "latitude DOUBLE, " +
                 "longitude DOUBLE, " +
                 "gpsStrength DOUBLE)");
-
-
 
 
         mSQLiteDatabase.execSQL("INSERT INTO permLocationTable_1 "+

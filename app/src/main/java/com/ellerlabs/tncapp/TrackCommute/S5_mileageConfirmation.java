@@ -1,8 +1,13 @@
 package com.ellerlabs.tncapp.TrackCommute;
 
+import static com.ellerlabs.tncapp.TrackCommute.S4_S_distanceCalculator.distance;
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +18,7 @@ import com.ellerlabs.tncapp.MainActivity;
 import com.ellerlabs.tncapp.R;
 
 import java.text.DecimalFormat;
+import android.database.sqlite.SQLiteDatabase;
 
 
 public class S5_mileageConfirmation extends AppCompatActivity {
@@ -22,6 +28,9 @@ public class S5_mileageConfirmation extends AppCompatActivity {
     Intent intent;
     Double mileage;
     int id;
+
+    private SQLiteDatabase mSQLiteDatabase;
+    ContentValues values;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +53,20 @@ public class S5_mileageConfirmation extends AppCompatActivity {
         yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(S5_mileageConfirmation.this, "Saved successfully. Thank you for logging your commute.", Toast.LENGTH_SHORT).show();
+
+                 mSQLiteDatabase = com.ellerlabs.tncapp.TrackCommute.S5_mileageConfirmation.this.openOrCreateDatabase("TrackCommuteInfo", Context.MODE_PRIVATE, null);
+
+                values = new ContentValues();
+                values.put("OVERRIDE_MILEAGE",  "N/A");
+                values.put("OVERRIDE_MILEAGE_URI","N/A  : GPS Calculated Data Correctly");
+
+
+                values.put("SQL_TABLE_NAME", "permLocationTable_1");
+
+                mSQLiteDatabase.update("TrackCommuteInfo",values,"ID = ?",new String[]{String.valueOf(id)});
+
+                startActivity(new Intent(com.ellerlabs.tncapp.TrackCommute.S5_mileageConfirmation.this,
+                        com.ellerlabs.tncapp.TrackCommute.uploadAllCommuteDataToFirebase.class));
             }
         });
 
@@ -66,8 +88,6 @@ public class S5_mileageConfirmation extends AppCompatActivity {
 
     public void goToS6(){
 
-
-
         intent = new Intent (this, S6_collectCorrectOdometer.class);
         intent.putExtra("ID",id);
 
@@ -76,5 +96,10 @@ public class S5_mileageConfirmation extends AppCompatActivity {
 
     public void goToMainScreen(View view){
         startActivity(new Intent(this, MainActivity.class));
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, "Please avoid pressing the back button, this will corrupt the data collected.", Toast.LENGTH_LONG).show();
     }
 }

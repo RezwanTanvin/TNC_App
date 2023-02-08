@@ -195,10 +195,10 @@ public class S4_S_distanceCalculator extends Service {
 
                             DecimalFormat df = new DecimalFormat("#.#####");
 
-                            db.child(String.valueOf(UID)).child("Lat").setValue(latitude);
-                            db.child(String.valueOf(UID)).child("Long").setValue(longitude );
-                            db.child(String.valueOf(UID)).child("Strength").setValue(df.format(location.getAccuracy()) );
-                            db.child(String.valueOf(UID)).child("Distance").setValue(df.format(distance) + " KM");
+//                            db.child(String.valueOf(UID)).child("Lat").setValue(latitude);
+//                            db.child(String.valueOf(UID)).child("Long").setValue(longitude );
+//                            db.child(String.valueOf(UID)).child("Strength").setValue(df.format(location.getAccuracy()) );
+//                            db.child(String.valueOf(UID)).child("Distance").setValue(df.format(distance) + " KM");
 
 
                         }
@@ -267,4 +267,8 @@ public class S4_S_distanceCalculator extends Service {
        mLocationManager.removeUpdates(mLocationListener);
 
     }
+
+
+
+
 }
