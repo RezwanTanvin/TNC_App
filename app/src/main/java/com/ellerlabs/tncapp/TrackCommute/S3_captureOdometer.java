@@ -11,6 +11,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +33,8 @@ public class S3_captureOdometer extends AppCompatActivity {
    String mileageFromCameraClass;
    TextView header;
    String Mileage;
+
+   ImageButton zooomIntoThumbNailButton,retryTakePictureButton;
     //private static final int CAMERA_REQUEST = 1888;
 
     @Override
@@ -41,11 +44,13 @@ public class S3_captureOdometer extends AppCompatActivity {
 
         mileage= findViewById(R.id.mileageAtStarteditText);
         takePic = findViewById(R.id.takepictuerofOdotmeterBtn);
-        thumbnail = findViewById(R.id.imageView);
+        thumbnail = findViewById(R.id.thumbnail);
         submitBtn = findViewById(R.id.submitBtn1);
         submitBtn.setEnabled(false);
         takePic.setEnabled(false);
-        header = findViewById(R.id.textView4);
+        header = findViewById(R.id.header);
+        zooomIntoThumbNailButton = findViewById(R.id.zooomIntoThumbNailButton);
+        retryTakePictureButton = findViewById(R.id.imageButton3);
         Mileage = "";
 
 
@@ -75,6 +80,8 @@ public class S3_captureOdometer extends AppCompatActivity {
             thumbnail.setVisibility(View.VISIBLE);
             Bitmap bitmap = BitmapFactory.decodeFile(FilePath);
             thumbnail.setEnabled(true);
+            zooomIntoThumbNailButton.setVisibility(View.VISIBLE);
+            retryTakePictureButton.setVisibility(View.VISIBLE);
             thumbnail.setImageBitmap(bitmap);
             header.setText("Confirm the following information");
             takePic.setVisibility(View.INVISIBLE);
@@ -134,6 +141,20 @@ public class S3_captureOdometer extends AppCompatActivity {
                 Intent intent = new Intent(S3_captureOdometer.this, ImagePreview.class);
                 intent.putExtra("FilePath",FilePath);
                 startActivity(intent);
+            }
+        });
+
+        zooomIntoThumbNailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                thumbnail.performClick();
+            }
+        });
+
+        retryTakePictureButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                takePic.performClick();
             }
         });
 

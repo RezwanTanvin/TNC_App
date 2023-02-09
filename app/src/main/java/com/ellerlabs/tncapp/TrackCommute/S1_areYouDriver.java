@@ -18,9 +18,6 @@ import java.util.Date;
 public class S1_areYouDriver extends AppCompatActivity {
 
     SQLiteDatabase db;
-    Date date;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

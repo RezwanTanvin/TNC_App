@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ellerlabs.tncapp.TrackCommute.S1_areYouDriver;
 import com.google.firebase.auth.FirebaseAuth;
@@ -96,6 +97,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void startTrackCommute(View view){
         startActivity(new Intent(this, S1_areYouDriver.class));
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, "Please avoid pressing the back button, this will corrupt the data collected.", Toast.LENGTH_LONG).show();
     }
 
 }

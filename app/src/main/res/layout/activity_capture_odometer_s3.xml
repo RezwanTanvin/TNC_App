@@ -7,7 +7,7 @@
     tools:context="com.ellerlabs.tncapp.TrackCommute.S3_captureOdometer">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -36,9 +36,9 @@
         android:ems="10"
         android:hint="Mileage at Start"
         android:inputType="number"
-        app:layout_constraintEnd_toEndOf="@+id/textView4"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintEnd_toEndOf="@+id/header"
+        app:layout_constraintStart_toStartOf="@+id/header"
+        app:layout_constraintTop_toBottomOf="@+id/header" />
 
     <Button
         android:id="@+id/takepictuerofOdotmeterBtn"
@@ -58,12 +58,12 @@
         android:onClick="goToS2orS6"
         android:text="Submit"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintEnd_toEndOf="@+id/textView4"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="@+id/header"
+        app:layout_constraintStart_toStartOf="@+id/header"
         app:layout_constraintTop_toBottomOf="@+id/takepictuerofOdotmeterBtn" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/thumbnail"
         android:layout_width="166dp"
         android:layout_height="166dp"
         android:layout_marginStart="16dp"
@@ -78,5 +78,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mileageAtStarteditText" />
+
+    <ImageButton
+        android:id="@+id/zooomIntoThumbNailButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/thumbnail"
+        app:layout_constraintStart_toEndOf="@+id/thumbnail"
+        app:srcCompat="@drawable/zoom_in" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="4dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/zooomIntoThumbNailButton"
+        app:layout_constraintStart_toEndOf="@+id/thumbnail"
+        app:srcCompat="@drawable/cameraswitch" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

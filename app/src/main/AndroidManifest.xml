@@ -27,6 +27,7 @@
         tools:targetApi="31">
         <activity
             android:name=".TrackCommute.uploadAllCommuteDataToFirebase"
+            android:screenOrientation="portrait"
             android:exported="false" />
 
         <service
@@ -44,33 +45,43 @@
             android:label="@string/title_activity_googel_maps_data" />
         <activity
             android:name=".ImagePreview"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Camera"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".SignUp"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".TrackCommute.S6_collectCorrectOdometer"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".TrackCommute.S5_mileageConfirmation"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".TrackCommute.S4_timeAndDistanceTravelled"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".TrackCommute.S3_captureOdometer"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".TrackCommute.S2_collectVehicleTripInfo"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".TrackCommute.S1_areYouDriver"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
 
         <activity

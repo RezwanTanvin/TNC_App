@@ -21,23 +21,27 @@
 
     <Button
         android:id="@+id/dayTripBtn"
-        android:layout_width="150dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
         android:text="Day Trip"
+        app:layout_constraintEnd_toStartOf="@+id/guideline8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5"
         app:toggleCheckedStateOnClick="true" />
 
     <Button
         android:id="@+id/overNightBtn"
-        android:layout_width="150dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="24dp"
         android:text="Overnight Trip"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
         app:layout_constraintTop_toBottomOf="@+id/textView5"
         app:toggleCheckedStateOnClick="true" />
 
@@ -68,12 +72,14 @@
 
     <Button
         android:id="@+id/snwoMobileBtn"
-        android:layout_width="150dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="24dp"
         android:text="Snowmobile"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         app:toggleCheckedStateOnClick="true" />
 
@@ -101,11 +107,13 @@
 
     <Button
         android:id="@+id/atvBtn"
-        android:layout_width="150dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
         android:text="ATV"
+        app:layout_constraintEnd_toStartOf="@+id/guideline8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         app:toggleCheckedStateOnClick="true" />
@@ -146,5 +154,14 @@
         app:layout_constraintBottom_toBottomOf="@+id/truckBtn"
         app:layout_constraintStart_toEndOf="@+id/truckBtn"
         app:layout_constraintTop_toTopOf="@+id/truckBtn" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="206dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.50121653"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

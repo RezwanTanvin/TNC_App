@@ -111,8 +111,8 @@ public class S4_timeAndDistanceTravelled extends AppCompatActivity {
 
     public void goToS5(View view){
 
-        timerRunning= false;
-        stopService(intent);
+
+        //TODO: Does not say what to do if the user selects no.
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("End Commute");
@@ -121,6 +121,9 @@ public class S4_timeAndDistanceTravelled extends AppCompatActivity {
                 .setPositiveButton("Confirm Reached", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
+                timerRunning= false;
+                stopService(intent);
 
                 updateLocationDatabase();
                 updateTripCommuteDatabase();
@@ -143,7 +146,12 @@ public class S4_timeAndDistanceTravelled extends AppCompatActivity {
                             com.ellerlabs.tncapp.TrackCommute.uploadAllCommuteDataToFirebase.class));
                 }
             }
-        });
+        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
 
 
         builder.create().show();

@@ -27,7 +27,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 
@@ -49,14 +48,12 @@ public class S4_S_distanceCalculator extends Service {
     private FirebaseDatabase database;
     DatabaseReference db;
 
-    int UID;
 
 
 
     @Override
     public void onCreate() {
 
-        UID = 0;
         distance = 0.0;
         lati1 = 0.0;
 
@@ -105,7 +102,7 @@ public class S4_S_distanceCalculator extends Service {
 
     private Notification builder (){
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this,"notifyGPS")
-                .setSmallIcon(R.drawable.lightning)
+                .setSmallIcon(R.drawable.sunny_logo)
                 .setContentTitle("Track Commute : Active")
                 .setContentText("GPS Data collection : Active")
                 .setStyle(new NotificationCompat.BigTextStyle()
@@ -189,17 +186,6 @@ public class S4_S_distanceCalculator extends Service {
                             {
                                 distance = distance + tempDistance;
                             }
-
-
-                            UID++;
-
-                            DecimalFormat df = new DecimalFormat("#.#####");
-
-//                            db.child(String.valueOf(UID)).child("Lat").setValue(latitude);
-//                            db.child(String.valueOf(UID)).child("Long").setValue(longitude );
-//                            db.child(String.valueOf(UID)).child("Strength").setValue(df.format(location.getAccuracy()) );
-//                            db.child(String.valueOf(UID)).child("Distance").setValue(df.format(distance) + " KM");
-
 
                         }
                     }

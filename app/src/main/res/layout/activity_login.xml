@@ -13,14 +13,15 @@
 
     <Button
         android:id="@+id/signUpBtn"
-        android:layout_width="171dp"
+        android:layout_width="0dp"
         android:layout_height="46dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/roundedcorner_buttons"
         android:onClick="goToSignUp"
         android:text="Sign Up "
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toBottomOf="@+id/password" />
 
     <EditText
@@ -70,18 +71,19 @@
 
     <Button
         android:id="@+id/loginBtn"
-        android:layout_width="171dp"
+        android:layout_width="0dp"
         android:layout_height="46dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
         android:background="@drawable/roundedcorner_buttons"
         android:text="Log In"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/password" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="402dp"
+        android:layout_width="0dp"
         android:layout_height="231dp"
         android:layout_marginTop="32dp"
         android:foreground="@drawable/logo"
@@ -89,5 +91,26 @@
         app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.04" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.96" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

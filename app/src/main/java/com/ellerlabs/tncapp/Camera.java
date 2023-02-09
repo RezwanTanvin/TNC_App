@@ -14,17 +14,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.DrawableWrapper;
+import android.graphics.Point;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.hardware.camera2.params.MeteringRectangle;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 
+import androidx.camera.core.CameraControl;
+import androidx.camera.core.CameraX;
+import androidx.camera.core.FocusMeteringAction;
 import androidx.camera.core.ImageCapture;
+import androidx.camera.core.MeteringPoint;
+import androidx.camera.core.MeteringPointFactory;
+import androidx.camera.core.impl.PreviewConfig;
 import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -39,6 +43,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 
 import android.view.MotionEvent;
+import android.view.Surface;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -48,6 +53,10 @@ import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.core.Preview;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ImageCaptureException;
+import androidx.camera.core.MeteringPointFactory;
+import androidx.camera.core.FocusMeteringAction;
+import android.graphics.RectF;
+import android.view.MotionEvent;
 
 import android.Manifest;
 
@@ -68,7 +77,6 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
 
     boolean fromS6;
 
-
     @RequiresApi(api = Build.VERSION_CODES.Q)
 
     @Override
@@ -76,9 +84,9 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
+
         previewView = findViewById(R.id.previewView);
         picCapture = findViewById(R.id.image_capture_button);
-        //videoCapture = findViewById(R.id.video_capture_button);
         flashToogle = findViewById(R.id.flashToogle);
         flashLabel = findViewById(R.id.flashOnOff);
         progressBar = findViewById(R.id.progressBar);
@@ -108,20 +116,34 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
             public boolean onTouch(View v, MotionEvent event)
             {
                 if (event.getAction() == MotionEvent.ACTION_DOWN){
-                    Drawable drawable = ContextCompat.getDrawable(com.ellerlabs.tncapp.Camera.this, R.drawable.camera_button_gray);
-                    picCapture.setForeground(drawable);
+                    picCapture.setAlpha(0.5f);
                 }
 
                 else if(event.getAction() == MotionEvent.ACTION_UP)
                 {
-                    Drawable drawable = ContextCompat.getDrawable(com.ellerlabs.tncapp.Camera.this, R.drawable.camera_button);
-                    picCapture.setForeground(drawable);
+                   picCapture.setAlpha(1f);
+                }
+                return false;
+            }
+        });
 
+        flashToogle.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event)
+            {
+                if (event.getAction() == MotionEvent.ACTION_DOWN){
+                    flashToogle.setAlpha(0.5f);
+                }
+
+                else if(event.getAction() == MotionEvent.ACTION_UP)
+                {
+                    flashToogle.setAlpha(1f);
                 }
 
                 return false;
             }
         });
+
 
 
             //videoCapture.setOnClickListener(this);
@@ -156,7 +178,12 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
         }, getExecutor());
 
 
+
+
+
     }
+
+
 
 
 
@@ -182,6 +209,9 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
         cameraProvider.bindToLifecycle(this,cameraSelector,preview,imageCapture);
 
        imageCapture.setFlashMode(ImageCapture.FLASH_MODE_AUTO);
+
+
+
         flashLabel.setText("Auto Flash");
     }
 
@@ -205,9 +235,13 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
                     imageCapture.setFlashMode(ImageCapture.FLASH_MODE_OFF);
                     flashLabel.setText("Flash OFF");
 
-                } else {
-                    imageCapture.setFlashMode(ImageCapture.FLASH_MODE_ON);
+                } else if (imageCapture.getFlashMode() == ImageCapture.FLASH_MODE_OFF)  {
+                    imageCapture.setFlashMode(ImageCapture.FLASH_MODE_AUTO);
                     flashLabel.setText("Flash ON");
+                }
+                else if (imageCapture.getFlashMode() == ImageCapture.FLASH_MODE_AUTO ) {
+                imageCapture.setFlashMode(ImageCapture.FLASH_MODE_ON);
+                flashLabel.setText("Flash AUTO");
                 }
             case R.id.flashOnOff:
                 if (imageCapture.getFlashMode() == ImageCapture.FLASH_MODE_ON)
@@ -215,13 +249,18 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
                     imageCapture.setFlashMode(ImageCapture.FLASH_MODE_OFF);
                     flashLabel.setText("Flash OFF");
 
-                } else {
-                    imageCapture.setFlashMode(ImageCapture.FLASH_MODE_ON);
+                } else if (imageCapture.getFlashMode() == ImageCapture.FLASH_MODE_OFF)  {
+                    imageCapture.setFlashMode(ImageCapture.FLASH_MODE_AUTO);
                     flashLabel.setText("Flash ON");
+                }
+                else if (imageCapture.getFlashMode() == ImageCapture.FLASH_MODE_AUTO ) {
+                    imageCapture.setFlashMode(ImageCapture.FLASH_MODE_ON);
+                    flashLabel.setText("Flash AUTO");
                 }
         }
     }
     //TODO : need to add capability for user to review photo right after taking it.
+    //TODO: Need to create feature that allows autofocus on camera preview.
     private void capturePhoto() {
 
 
@@ -271,8 +310,8 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
 
                 });
 
+
+
+
     }
-
-
-
-};
+}
