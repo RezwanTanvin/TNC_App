@@ -18,9 +18,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
     TextView userName;
 
+    Button startBtn, inProgressBtn;
+
     ImageView imageView1,imageView2,imageView3;
     @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
@@ -44,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         userName = findViewById(R.id.Hi);
+        startBtn = findViewById(R.id.startTaskBtn);
+        inProgressBtn = findViewById(R.id.inProgressBtn);
+
 
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
@@ -62,11 +69,16 @@ public class MainActivity extends AppCompatActivity {
                     READ_EXTERNAL_STORAGE,
             }, PERMISSION_REQUEST_CODE);
         };
-        //TODO : Will not work for multiple users on a device when loggin in offline.
+        //TODO : Will not work for multiple users on a device when loggin in offline. Keep showing the same username (last loggedin user).This only happens when offline.
 
         userName.setText("Hello\n" + user.getDisplayName());
 
 
+        //TODO : For some weird reason, I am unable to change the color of a button. Not sure why.
+//        startBtn.setBackgroundColor(Color.WHITE);
+//        startBtn.setTextColor(Color.BLACK);
+//        inProgressBtn.setBackgroundColor(Color.BLACK);
+//        inProgressBtn.setTextColor(Color.WHITE);
 
         imageView1 = findViewById(R.id.trackCommuteImage);
         imageView2 = findViewById(R.id.harvestProductImage);

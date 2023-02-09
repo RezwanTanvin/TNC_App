@@ -18,6 +18,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.hardware.camera2.params.MeteringRectangle;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -209,6 +210,7 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
         cameraProvider.bindToLifecycle(this,cameraSelector,preview,imageCapture);
 
        imageCapture.setFlashMode(ImageCapture.FLASH_MODE_AUTO);
+       imageCapture.setTargetRotation(Surface.ROTATION_0);
 
 
 

@@ -12,23 +12,25 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import com.ellerlabs.tncapp.R;
-
 
 public class ImagePreview extends AppCompatActivity {
     Intent intent;
     String FilePath;
     ImageView image;
-    ImageButton iButton;
+    ImageButton backButton,rotateImageBtn;
     float mScaleFactor = 1.0f;
     ScaleGestureDetector mScaleGestureDetector;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.image_preview);
 
         image = findViewById(R.id.imageView3);
-        iButton = findViewById(R.id.imageButton);
+        rotateImageBtn = findViewById(R.id.rotateImageBtn3);
+        backButton = findViewById(R.id.imageButton);
+
         mScaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
 
         intent = getIntent();
@@ -39,8 +41,19 @@ public class ImagePreview extends AppCompatActivity {
             image.setImageBitmap(bitmap);
         }
 
+        rotateImageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(image.getRotation() == 90f){
+                    image.setRotation(0f);
+                }else{
+                    image.setRotation(90f);
+                }
+            }
+        });
 
-        iButton.setOnClickListener(new View.OnClickListener() {
+
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
