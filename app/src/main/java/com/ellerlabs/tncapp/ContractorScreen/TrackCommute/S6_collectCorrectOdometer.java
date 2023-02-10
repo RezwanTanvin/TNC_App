@@ -1,6 +1,5 @@
-package com.ellerlabs.tncapp.TrackCommute;
+package com.ellerlabs.tncapp.ContractorScreen.TrackCommute;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
@@ -19,23 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ellerlabs.tncapp.Camera;
-import com.ellerlabs.tncapp.ImagePreview;
-import com.ellerlabs.tncapp.MainActivity;
 import com.ellerlabs.tncapp.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 
 
 public class S6_collectCorrectOdometer extends AppCompatActivity {
@@ -61,7 +44,7 @@ public class S6_collectCorrectOdometer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_collect_correct_odometer_s6);
+        setContentView(R.layout.track_commute_activity_collect_correct_odometer_s6);
 
         intent = new Intent();
         intent = getIntent();
@@ -167,7 +150,7 @@ public class S6_collectCorrectOdometer extends AppCompatActivity {
 
                 Toast.makeText(S6_collectCorrectOdometer.this, "Saved successfully. Thank you for logging your commute.", Toast.LENGTH_SHORT).show();
 
-                startActivity(new Intent(com.ellerlabs.tncapp.TrackCommute.S6_collectCorrectOdometer.this, com.ellerlabs.tncapp.TrackCommute.uploadAllCommuteDataToFirebase.class));
+                startActivity(new Intent(S6_collectCorrectOdometer.this, uploadAllCommuteDataToFirebase.class));
 
                }
                catch(Exception e)

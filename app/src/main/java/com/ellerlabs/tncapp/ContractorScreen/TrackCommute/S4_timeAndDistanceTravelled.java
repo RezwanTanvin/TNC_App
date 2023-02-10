@@ -1,7 +1,7 @@
-package com.ellerlabs.tncapp.TrackCommute;
+package com.ellerlabs.tncapp.ContractorScreen.TrackCommute;
 
 
-import static com.ellerlabs.tncapp.TrackCommute.S4_S_distanceCalculator.distance;
+import static com.ellerlabs.tncapp.ContractorScreen.TrackCommute.S4_S_distanceCalculator.distance;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +17,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ellerlabs.tncapp.MainActivity;
 import com.ellerlabs.tncapp.R;
 
 import java.text.DecimalFormat;
@@ -41,7 +40,7 @@ public class S4_timeAndDistanceTravelled extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_track_time_distance_s4);
+        setContentView(R.layout.track_commute_activity_track_time_distance_s4);
 
         intent = new Intent();
         intent = getIntent();
@@ -142,8 +141,8 @@ public class S4_timeAndDistanceTravelled extends AppCompatActivity {
                 else{
                     Toast.makeText(S4_timeAndDistanceTravelled.this, "Saved successfully. Thank you for logging your commute.", Toast.LENGTH_SHORT).show();
 
-                    startActivity(new Intent(com.ellerlabs.tncapp.TrackCommute.S4_timeAndDistanceTravelled.this,
-                            com.ellerlabs.tncapp.TrackCommute.uploadAllCommuteDataToFirebase.class));
+                    startActivity(new Intent(S4_timeAndDistanceTravelled.this,
+                            uploadAllCommuteDataToFirebase.class));
                 }
             }
         }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

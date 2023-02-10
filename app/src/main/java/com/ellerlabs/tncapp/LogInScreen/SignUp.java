@@ -1,4 +1,4 @@
-package com.ellerlabs.tncapp;
+package com.ellerlabs.tncapp.LogInScreen;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ellerlabs.tncapp.ContractorScreen.MainActivity;
 import com.ellerlabs.tncapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

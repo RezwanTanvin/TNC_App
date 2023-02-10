@@ -14,28 +14,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Point;
-import android.graphics.Rect;
-import android.graphics.RectF;
-import android.hardware.camera2.params.MeteringRectangle;
-import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 
-import androidx.camera.core.CameraControl;
-import androidx.camera.core.CameraX;
-import androidx.camera.core.FocusMeteringAction;
 import androidx.camera.core.ImageCapture;
-import androidx.camera.core.MeteringPoint;
-import androidx.camera.core.MeteringPointFactory;
-import androidx.camera.core.impl.PreviewConfig;
 import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.ellerlabs.tncapp.TrackCommute.S3_captureOdometer;
-import com.ellerlabs.tncapp.TrackCommute.S6_collectCorrectOdometer;
+import com.ellerlabs.tncapp.ContractorScreen.TrackCommute.S3_captureOdometer;
+import com.ellerlabs.tncapp.ContractorScreen.TrackCommute.S6_collectCorrectOdometer;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.io.File;
@@ -54,10 +43,6 @@ import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.core.Preview;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ImageCaptureException;
-import androidx.camera.core.MeteringPointFactory;
-import androidx.camera.core.FocusMeteringAction;
-import android.graphics.RectF;
-import android.view.MotionEvent;
 
 import android.Manifest;
 

@@ -1,4 +1,4 @@
-package com.ellerlabs.tncapp.TrackCommute;
+package com.ellerlabs.tncapp;
 
 import androidx.fragment.app.FragmentActivity;
 

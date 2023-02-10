@@ -1,6 +1,4 @@
-package com.ellerlabs.tncapp.TrackCommute;
-
-import static com.ellerlabs.tncapp.TrackCommute.S4_S_distanceCalculator.distance;
+package com.ellerlabs.tncapp.ContractorScreen.TrackCommute;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,11 +12,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ellerlabs.tncapp.MainActivity;
+import com.ellerlabs.tncapp.ContractorScreen.MainActivity;
 import com.ellerlabs.tncapp.R;
 
 import java.text.DecimalFormat;
-import android.database.sqlite.SQLiteDatabase;
 
 
 public class S5_mileageConfirmation extends AppCompatActivity {
@@ -35,7 +32,7 @@ public class S5_mileageConfirmation extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mileage_confirmation_s5);
+        setContentView(R.layout.track_commute_activity_mileage_confirmation_s5);
 
         intent = new Intent();
         intent = getIntent();
@@ -54,7 +51,7 @@ public class S5_mileageConfirmation extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                 mSQLiteDatabase = com.ellerlabs.tncapp.TrackCommute.S5_mileageConfirmation.this.openOrCreateDatabase("TrackCommuteInfo", Context.MODE_PRIVATE, null);
+                 mSQLiteDatabase = S5_mileageConfirmation.this.openOrCreateDatabase("TrackCommuteInfo", Context.MODE_PRIVATE, null);
 
                 values = new ContentValues();
                 values.put("OVERRIDE_MILEAGE",  "N/A");
@@ -65,8 +62,8 @@ public class S5_mileageConfirmation extends AppCompatActivity {
 
                 mSQLiteDatabase.update("TrackCommuteInfo",values,"ID = ?",new String[]{String.valueOf(id)});
 
-                startActivity(new Intent(com.ellerlabs.tncapp.TrackCommute.S5_mileageConfirmation.this,
-                        com.ellerlabs.tncapp.TrackCommute.uploadAllCommuteDataToFirebase.class));
+                startActivity(new Intent(S5_mileageConfirmation.this,
+                        uploadAllCommuteDataToFirebase.class));
             }
         });
 

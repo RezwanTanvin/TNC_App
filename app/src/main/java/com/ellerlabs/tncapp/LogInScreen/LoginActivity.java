@@ -1,4 +1,4 @@
-package com.ellerlabs.tncapp;
+package com.ellerlabs.tncapp.LogInScreen;
 
 import static android.content.ContentValues.TAG;
 
@@ -22,8 +22,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.ellerlabs.tncapp.AdminScreen.MainActivity_Admin;
+import com.ellerlabs.tncapp.ContractorScreen.MainActivity;
 import com.ellerlabs.tncapp.R;
-import com.ellerlabs.tncapp.TrackCommute.LocationDataObj;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -103,8 +104,11 @@ public class LoginActivity extends AppCompatActivity {
                             catch (Exception e){
                                 Log.d(TAG, e.toString());
                             }
-
-                            startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                            if(username.equals("admin@tnc.com")){
+                                startActivity(new Intent(LoginActivity.this, MainActivity_Admin.class));
+                            }else {
+                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            }
 
                         } else {
 
@@ -139,7 +143,14 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             if (logInInfoMatched){
                                 Toast.makeText(LoginActivity.this, "Logged in offline using previously saved log in details. Some fucntions may be unavilable.",Toast.LENGTH_LONG).show();
-                                startActivity(new Intent(LoginActivity.this,MainActivity.class));
+
+
+                                if(username.equals("admin@tnc.com")){
+                                    startActivity(new Intent(LoginActivity.this, MainActivity_Admin.class));
+                                }else {
+                                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                }
+
                             }
                             else {
 
@@ -193,8 +204,8 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-        usernameEditText.setText("rez@test.com");
-        passwordEditText.setText("abcdef");
+        usernameEditText.setText("admin@tnc.com");
+        passwordEditText.setText("TncAdmin321");
     }
 
     private void updateUI(FirebaseUser currentuser) {

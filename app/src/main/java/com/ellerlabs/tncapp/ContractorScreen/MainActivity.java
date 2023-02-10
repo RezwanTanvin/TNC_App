@@ -1,4 +1,4 @@
-package com.ellerlabs.tncapp;
+package com.ellerlabs.tncapp.ContractorScreen;
 
 import static android.Manifest.permission.ACCESS_BACKGROUND_LOCATION;
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
@@ -18,7 +18,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -27,7 +26,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ellerlabs.tncapp.TrackCommute.S1_areYouDriver;
+import com.ellerlabs.tncapp.R;
+import com.ellerlabs.tncapp.ContractorScreen.TrackCommute.S1_areYouDriver;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

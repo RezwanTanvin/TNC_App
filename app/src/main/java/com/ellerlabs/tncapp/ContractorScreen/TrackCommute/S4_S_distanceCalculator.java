@@ -1,4 +1,4 @@
-package com.ellerlabs.tncapp.TrackCommute;
+package com.ellerlabs.tncapp.ContractorScreen.TrackCommute;
 
 import android.Manifest;
 import android.app.Notification;

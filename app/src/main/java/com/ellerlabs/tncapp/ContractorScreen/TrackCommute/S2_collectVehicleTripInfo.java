@@ -1,4 +1,4 @@
-package com.ellerlabs.tncapp.TrackCommute;
+package com.ellerlabs.tncapp.ContractorScreen.TrackCommute;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -46,7 +46,7 @@ public class S2_collectVehicleTripInfo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_collect_vehicle_trip_info_s2);
+        setContentView(R.layout.track_commute_activity_collect_vehicle_trip_info_s2);
 
         atv = findViewById(R.id.atvBtn);
         atv.setBackgroundColor(Color.DKGRAY);

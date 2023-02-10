@@ -1,4 +1,4 @@
-package com.ellerlabs.tncapp;
+package com.ellerlabs.tncapp.LogInScreen;
 
 import java.util.ArrayList;
 

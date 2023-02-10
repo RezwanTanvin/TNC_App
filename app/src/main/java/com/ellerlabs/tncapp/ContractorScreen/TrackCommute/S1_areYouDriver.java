@@ -1,6 +1,5 @@
-package com.ellerlabs.tncapp.TrackCommute;
+package com.ellerlabs.tncapp.ContractorScreen.TrackCommute;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,11 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.ellerlabs.tncapp.MainActivity;
+import com.ellerlabs.tncapp.ContractorScreen.MainActivity;
 import com.ellerlabs.tncapp.R;
-
-
-import java.util.Date;
 
 public class S1_areYouDriver extends AppCompatActivity {
 
@@ -22,7 +18,7 @@ public class S1_areYouDriver extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_are_you_driver_s1);
+        setContentView(R.layout.track_commute_activity_are_you_driver_s1);
 
         db = openOrCreateDatabase("TrackCommuteInfo",MODE_PRIVATE,null);
 

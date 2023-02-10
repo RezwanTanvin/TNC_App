@@ -26,18 +26,21 @@
         android:theme="@style/Theme.TNCApp"
         tools:targetApi="31">
         <activity
+            android:name=".ShowUserCommuteInfo"
+            android:exported="false" />
+        <activity
             android:name=".AdminScreen.CommuteData.ShowAndChooseUser"
             android:exported="false" />
         <activity
             android:name=".AdminScreen.MainActivity_Admin"
             android:exported="false" />
         <activity
-            android:name=".TrackCommute.uploadAllCommuteDataToFirebase"
+            android:name=".ContractorScreen.TrackCommute.uploadAllCommuteDataToFirebase"
             android:exported="false"
             android:screenOrientation="portrait" />
 
         <service
-            android:name=".TrackCommute.S4_S_distanceCalculator"
+            android:name=".ContractorScreen.TrackCommute.S4_S_distanceCalculator"
             android:enabled="true"
             android:exported="true" />
 
@@ -46,7 +49,7 @@
             android:value="AIzaSyCHf4KsXXQwmymVYdVlEzvp1-wjCmpIugg" />
 
         <activity
-            android:name=".TrackCommute.googelMapsData"
+            android:name=".googelMapsData"
             android:exported="false"
             android:label="@string/title_activity_googel_maps_data" />
         <activity
@@ -58,39 +61,39 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SignUp"
+            android:name=".LogInScreen.SignUp"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".TrackCommute.S6_collectCorrectOdometer"
+            android:name=".ContractorScreen.TrackCommute.S6_collectCorrectOdometer"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".TrackCommute.S5_mileageConfirmation"
+            android:name=".ContractorScreen.TrackCommute.S5_mileageConfirmation"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".TrackCommute.S4_timeAndDistanceTravelled"
+            android:name=".ContractorScreen.TrackCommute.S4_timeAndDistanceTravelled"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".TrackCommute.S3_captureOdometer"
+            android:name=".ContractorScreen.TrackCommute.S3_captureOdometer"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".TrackCommute.S2_collectVehicleTripInfo"
+            android:name=".ContractorScreen.TrackCommute.S2_collectVehicleTripInfo"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".TrackCommute.S1_areYouDriver"
+            android:name=".ContractorScreen.TrackCommute.S1_areYouDriver"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ContractorScreen.MainActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".LogInScreen.LoginActivity"
             android:exported="true"
             android:label="@string/app_name">
             <intent-filter>
