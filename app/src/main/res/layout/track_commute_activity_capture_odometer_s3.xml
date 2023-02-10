@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ellerlabs.tncapp.ContractorScreen.TrackCommute.S3_captureOdometer">
+
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:text="Enter the following information"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title3" />
+
+    <TextView
+        android:id="@+id/title3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Track Commute"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/mileageAtStarteditText"
+        android:layout_width="274dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="75dp"
+        android:ems="10"
+        android:hint="Mileage at Start"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="@+id/header"
+        app:layout_constraintStart_toStartOf="@+id/header"
+        app:layout_constraintTop_toBottomOf="@+id/header" />
+
+    <Button
+        android:id="@+id/takepictuerofOdotmeterBtn"
+        android:layout_width="217dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="24dp"
+        android:text="Take picture of Odometer"
+        app:layout_constraintEnd_toEndOf="@+id/mileageAtStarteditText"
+        app:layout_constraintStart_toStartOf="@+id/mileageAtStarteditText"
+        app:layout_constraintTop_toBottomOf="@+id/mileageAtStarteditText" />
+
+    <Button
+        android:id="@+id/submitBtn1"
+        android:layout_width="0dp"
+        android:layout_height="83dp"
+        android:layout_marginTop="104dp"
+        android:onClick="goToS2orS6"
+        android:text="Submit"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toEndOf="@+id/header"
+        app:layout_constraintStart_toStartOf="@+id/header"
+        app:layout_constraintTop_toBottomOf="@+id/takepictuerofOdotmeterBtn" />
+
+    <ImageView
+        android:id="@+id/thumbnail"
+        android:layout_width="166dp"
+        android:layout_height="166dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/roundedcorner_for_imageview"
+        android:elevation="5dp"
+        android:rotation="90"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/submitBtn1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mileageAtStarteditText" />
+
+    <ImageButton
+        android:id="@+id/zooomIntoThumbNailButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:tint="@color/white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/thumbnail"
+        app:layout_constraintStart_toEndOf="@+id/thumbnail"
+        app:srcCompat="@drawable/zoom_in" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="4dp"
+        android:tint="@color/white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/zooomIntoThumbNailButton"
+        app:layout_constraintStart_toEndOf="@+id/thumbnail"
+        app:srcCompat="@drawable/retake_photo" />
+
+    <ImageButton
+        android:id="@+id/rotateImageBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="4dp"
+        android:tint="@color/white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton3"
+        app:layout_constraintStart_toEndOf="@+id/thumbnail"
+        app:srcCompat="@drawable/cameraswitch" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

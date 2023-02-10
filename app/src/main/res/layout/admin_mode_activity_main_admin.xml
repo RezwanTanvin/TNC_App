@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F1EAEA"
+    android:backgroundTint="#192F2F"
+    tools:context=".AdminScreen.MainActivity_Admin">
+
+
+    <TextView
+        android:id="@+id/processHarvestLabel2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="Process Data"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#FFFFFF"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/processHarvestImage2"
+        app:layout_constraintStart_toEndOf="@+id/processHarvestImage2"
+        app:layout_constraintTop_toTopOf="@+id/processHarvestImage2" />
+
+    <TextView
+        android:id="@+id/harvestProductLabel2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="Harvest Data"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#FFFFFF"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/harvestProductImage2"
+        app:layout_constraintStart_toEndOf="@+id/harvestProductImage2"
+        app:layout_constraintTop_toTopOf="@+id/harvestProductImage2" />
+
+    <TextView
+        android:id="@+id/Hi2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="56dp"
+        android:text="Hello\n"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView22"
+        app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="83dp"
+        android:layout_height="23dp"
+        android:text="Home"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="@+id/guideline14"
+        app:layout_constraintTop_toTopOf="@+id/guideline9" />
+
+    <ImageView
+        android:id="@+id/trackCommuteImage2"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:background="@drawable/roundedcorner_for_imageview"
+
+        android:elevation="5dp"
+        android:onClick="goToTrackCommuteS1"
+        app:layout_constraintStart_toStartOf="@+id/guideline14"
+        app:layout_constraintTop_toTopOf="@+id/guideline10" />
+
+    <ImageView
+        android:id="@+id/harvestProductImage2"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/roundedcorner_for_imageview"
+        android:elevation="5dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/trackCommuteImage2"
+        app:layout_constraintTop_toBottomOf="@+id/trackCommuteImage2" />
+
+    <ImageView
+        android:id="@+id/processHarvestImage2"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/roundedcorner_for_imageview"
+        android:elevation="5dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/harvestProductImage2"
+        app:layout_constraintTop_toBottomOf="@+id/harvestProductImage2" />
+
+    <TextView
+        android:id="@+id/trackCommuteLabel2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:onClick="goToTrackCommuteS1"
+        android:text="Commute Data"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/trackCommuteImage2"
+        app:layout_constraintStart_toEndOf="@+id/trackCommuteImage2"
+        app:layout_constraintTop_toTopOf="@+id/trackCommuteImage2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Please choose an option below :"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@+id/Hi2"
+        app:layout_constraintTop_toBottomOf="@+id/Hi2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.35430917" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

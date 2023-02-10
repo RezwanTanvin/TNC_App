@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F1EAEA"
+    android:backgroundTint="#192F2F"
+    tools:context="com.ellerlabs.tncapp.ContractorScreen.MainActivity">
+
+    <TextView
+        android:id="@+id/processHarvestLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="Process Harvest"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/processHarvestImage"
+        app:layout_constraintStart_toEndOf="@+id/processHarvestImage"
+        app:layout_constraintTop_toTopOf="@+id/processHarvestImage" />
+
+    <TextView
+        android:id="@+id/harvestProductLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="Harvest Product"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/harvestProductImage"
+        app:layout_constraintStart_toEndOf="@+id/harvestProductImage"
+        app:layout_constraintTop_toTopOf="@+id/harvestProductImage" />
+
+    <TextView
+        android:id="@+id/Hi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="56dp"
+        android:text="Hello\n"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="83dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="24dp"
+        android:text="Home"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/startTaskBtn"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/roundedcorner_buttons"
+        android:elevation="20dp"
+        android:text="Start Task"
+        android:textColor="#FFFFFF"
+        app:cornerRadius="20dp"
+        app:layout_constraintStart_toStartOf="@+id/Hi"
+        app:layout_constraintTop_toBottomOf="@+id/Hi" />
+
+    <Button
+        android:id="@+id/inProgressBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="46dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/roundedcorner_buttons"
+        android:backgroundTint="#050000"
+        android:text="In Progress"
+        app:layout_constraintStart_toEndOf="@+id/startTaskBtn"
+        app:layout_constraintTop_toBottomOf="@+id/Hi" />
+
+    <ImageView
+        android:id="@+id/trackCommuteImage"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/roundedcorner_for_imageview"
+        android:elevation="5dp"
+        android:onClick="startTrackCommute"
+
+        app:layout_constraintEnd_toEndOf="@+id/startTaskBtn"
+        app:layout_constraintStart_toStartOf="@+id/startTaskBtn"
+        app:layout_constraintTop_toBottomOf="@+id/startTaskBtn" />
+
+    <ImageView
+        android:id="@+id/harvestProductImage"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/roundedcorner_for_imageview"
+        android:elevation="5dp"
+        app:layout_constraintStart_toStartOf="@+id/trackCommuteImage"
+        app:layout_constraintTop_toBottomOf="@+id/trackCommuteImage" />
+
+    <ImageView
+        android:id="@+id/processHarvestImage"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/roundedcorner_for_imageview"
+        android:elevation="5dp"
+        app:layout_constraintStart_toStartOf="@+id/harvestProductImage"
+        app:layout_constraintTop_toBottomOf="@+id/harvestProductImage" />
+
+    <TextView
+        android:id="@+id/trackCommuteLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:onClick="startTrackCommute"
+        android:text="Track Commute"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/trackCommuteImage"
+        app:layout_constraintStart_toEndOf="@+id/trackCommuteImage"
+        app:layout_constraintTop_toTopOf="@+id/trackCommuteImage" />
+</androidx.constraintlayout.widget.ConstraintLayout>
