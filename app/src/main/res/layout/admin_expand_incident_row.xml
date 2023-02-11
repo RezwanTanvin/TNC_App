@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="20"
                     android:paddingLeft="0dp"
-                    android:text="100.12 KM"
+                    android:text="000.00 KM"
                     android:textColor="#CDCDCD"
                     android:textSize="16sp" />
 
@@ -99,7 +99,9 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:paddingLeft="20dp"
-            android:paddingBottom="20dp">
+            android:paddingRight="20dp"
+            android:paddingBottom="20dp"
+            android:visibility="visible">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -108,17 +110,18 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView24"
+                    android:id="@+id/textView2423"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Trip Type : " />
 
                 <TextView
-                    android:id="@+id/textView23"
+                    android:id="@+id/tripType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="TextView" />
             </LinearLayout>
 
@@ -128,17 +131,18 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView24"
+                    android:id="@+id/textView221344"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Vehicle Type : " />
 
                 <TextView
-                    android:id="@+id/textView23"
+                    android:id="@+id/vehicleType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="TextView" />
 
             </LinearLayout>
@@ -150,17 +154,18 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView24"
+                    android:id="@+id/textView2124"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Drive Time :" />
 
                 <TextView
-                    android:id="@+id/textView23"
+                    android:id="@+id/driveTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="TextView" />
             </LinearLayout>
 
@@ -186,10 +191,11 @@
                     app:srcCompat="@android:drawable/ic_menu_camera" />
 
                 <TextView
-                    android:id="@+id/textView27"
+                    android:id="@+id/odometerAtStart"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="TextView" />
 
             </LinearLayout>
@@ -200,17 +206,18 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView24"
+                    android:id="@+id/textView2422"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Odometer @ End (GPS) :" />
 
                 <TextView
-                    android:id="@+id/textView23"
+                    android:id="@+id/odometerAtEnd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="TextView" />
 
             </LinearLayout>
@@ -221,104 +228,107 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/textView244"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Odometer @ End (User Requested Override) :" />
+
+                <TextView
+                    android:id="@+id/odometerAtEndByUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|start"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="TextView" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
                     android:id="@+id/textView24"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Odometer @ End (User Override) :" />
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:paddingStart="10dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="5dp"
+                    android:text="Odometer Reading : Images"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
+
+                <Button
+                    android:id="@+id/showStartingMileageBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_weight="3"
+                    android:text="Starting Mileage" />
+
+                <Button
+                    android:id="@+id/showEndingMileageByUserBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_weight="3"
+                    android:text="Ending Mileage" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
 
                 <TextView
-                    android:id="@+id/textView23"
-                    android:layout_width="match_parent"
+                    android:id="@+id/textView30"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView" />
+                    android:gravity="center"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="Location Data"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
+
+                <Button
+                    android:id="@+id/showMapsBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_weight="2"
+                    android:text="Open Map" />
             </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textView29"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="3" />
-
-            <TextView
-                android:id="@+id/textView24"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:gravity="center"
-                android:paddingStart="10dp"
-                android:text="Images"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
-
-            <TextView
-                android:id="@+id/textView28"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="3" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:paddingTop="10dp">
-
-            <Button
-                android:id="@+id/button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:paddingLeft="16dp"
-                android:paddingRight="5dp"
-                android:text="Button"
-                app:icon="@drawable/cameraswitch" />
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="Button"
-                android:visibility="invisible"
-                app:icon="@drawable/cameraswitch" />
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:paddingLeft="5dp"
-                android:paddingRight="10dp"
-                android:text="Button"
-                app:icon="@drawable/retake_photo" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:orientation="horizontal"
-            android:paddingTop="10dp">
-
-            <Button
-                android:id="@+id/button5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="Button" />
-        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

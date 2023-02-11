@@ -81,8 +81,7 @@ public class ListDataAdapterForSACUser extends
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.putExtra("Key",data.Key);
-                //TODO: Once next activitty is create , add this here.
-                ShowAndChooseUser.removeItem(position);
+
 
             }
         });
