@@ -261,8 +261,9 @@ public class uploadAllCommuteDataToFirebase extends AppCompatActivity {
         try{
             firebasedb = database.getReference("Commute Data").
                     child(user.getUid() + " - " + user.getDisplayName() + " - " + customEmail).
-                    child("Odometer_Readings").
-                    child(newObj.STARTED_DRIVING_AT_TIME);
+                    child(newObj.STARTED_DRIVING_AT_TIME).
+                    child("Odometer_Readings");
+
 
             firebasedb.child("DRIVE_TIME").setValue(newObj.DRIVE_TIME);
 
@@ -341,7 +342,6 @@ public class uploadAllCommuteDataToFirebase extends AppCompatActivity {
 
         firebasedb = database.getReference("Commute Data").
                 child(user.getUid() + " - " + user.getDisplayName() + " - " + customEmail).
-                child("Odometer_Readings").
                 child(newObj.STARTED_DRIVING_AT_TIME).
                 child("Location_Data");
 

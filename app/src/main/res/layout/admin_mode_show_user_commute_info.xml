@@ -47,4 +47,16 @@
         app:layout_constraintStart_toStartOf="@+id/guideline12s"
         app:layout_constraintTop_toBottomOf="@+id/textView20s" />
 
+    <ImageButton
+        android:id="@+id/backButtonSUCI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#00FFFFFF"
+        app:tint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/textView20s"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView20s"
+        app:srcCompat="@drawable/arrow_back"
+         />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

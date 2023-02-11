@@ -17,6 +17,7 @@
         android:paddingBottom="10dp">
 
         <LinearLayout
+            android:id="@+id/firstBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -33,7 +34,7 @@
                 android:paddingBottom="0dp">
 
                 <TextView
-                    android:id="@+id/DisplayNameTV"
+                    android:id="@+id/timeStarted"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="8"
@@ -70,7 +71,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/EmailTV"
+                    android:id="@+id/totalKMsDriven"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="20"
@@ -80,7 +81,7 @@
                     android:textSize="16sp" />
 
                 <ImageView
-                    android:id="@+id/arrowBtn"
+                    android:id="@+id/expandWithArrowBtn"
                     android:layout_width="42dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -95,13 +96,14 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/secondBox"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:paddingBottom="20dp"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"

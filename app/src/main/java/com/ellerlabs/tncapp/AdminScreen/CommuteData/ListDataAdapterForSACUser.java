@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ellerlabs.tncapp.AdminScreen.CommuteData.ShowUserCommInfo.ShowUserCommuteInfo;
 import com.ellerlabs.tncapp.R;
 
 import java.util.ArrayList;
@@ -24,14 +25,15 @@ public class ListDataAdapterForSACUser extends
         public TextView DisplayNameTV;
         public TextView EmailTV;
         public ImageView arrowBtn;
+
         public Context context;
         public LinearLayout userInfoBox;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            DisplayNameTV = itemView.findViewById(R.id.DisplayNameTV);
-            EmailTV = itemView.findViewById(R.id.EmailTV);
+            DisplayNameTV = itemView.findViewById(R.id.timeStarted);
+            EmailTV = itemView.findViewById(R.id.totalKMsDriven);
             arrowBtn = itemView.findViewById(R.id.arrowBtn);
             context = itemView.getContext();
             userInfoBox = itemView.findViewById(R.id.userInfoRow);
@@ -76,13 +78,21 @@ public class ListDataAdapterForSACUser extends
 
         LinearLayout userInfoBox_ = holder.userInfoBox;
 
+        Context context_ = holder.context;
+
         arrowBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
+                Intent intent = new Intent(context_, ShowUserCommuteInfo.class);
                 intent.putExtra("Key",data.Key);
+                context_.startActivity(intent);
+            }
+        });
 
-
+        userInfoBox_.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                arrowBtn.performClick();
             }
         });
     }

@@ -18,6 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.View;
+import android.widget.ImageButton;
 
 import java.util.ArrayList;
 
@@ -31,6 +32,8 @@ public class ShowAndChooseUser extends AppCompatActivity {
 
     RecyclerView rv;
 
+    ImageButton backButtonCDASCU;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,8 +43,13 @@ public class ShowAndChooseUser extends AppCompatActivity {
         user = mAuth.getCurrentUser();
         fdb = FirebaseDatabase.getInstance();
         fdbRef = fdb.getReference("Commute Data");
-
-
+        backButtonCDASCU = findViewById(R.id.backButtonCDASCU);
+        backButtonCDASCU.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         ArrayList<UserDataObjForSACUser> UserNameAndEmailList = new ArrayList<>();
 
@@ -94,9 +102,7 @@ public class ShowAndChooseUser extends AppCompatActivity {
 
     }
 
-    public static void removeItem(int x){
-        adapter.notifyItemRemoved(x);
-    }
+
 
     @Override
     protected void onStart() {

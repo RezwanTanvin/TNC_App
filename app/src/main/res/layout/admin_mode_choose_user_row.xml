@@ -32,7 +32,7 @@
                 android:paddingBottom="0dp">
 
                 <TextView
-                    android:id="@+id/DisplayNameTV"
+                    android:id="@+id/timeStarted"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="8"
@@ -76,7 +76,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/EmailTV"
+                    android:id="@+id/totalKMsDriven"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="50dp"
