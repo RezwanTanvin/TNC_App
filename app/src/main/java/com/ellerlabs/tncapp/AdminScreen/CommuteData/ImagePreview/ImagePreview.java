@@ -11,6 +11,7 @@ import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.ellerlabs.tncapp.R;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -25,6 +26,8 @@ public class ImagePreview extends AppCompatActivity {
     float mScaleFactor = 2.0f;
     ScaleGestureDetector mScaleGestureDetector;
 
+    ProgressBar progressBar;
+
     FirebaseStorage storage;
     StorageReference storageRef;
 
@@ -36,6 +39,7 @@ public class ImagePreview extends AppCompatActivity {
         image = findViewById(R.id.imageView10);
         rotateImageBtn = findViewById(R.id.rotateImageBtn20);
         backButton = findViewById(R.id.imageButton20);
+        progressBar = findViewById(R.id.imageViewProgressBar);
 
         mScaleGestureDetector = new ScaleGestureDetector(this, new com.ellerlabs.tncapp.AdminScreen.CommuteData.ImagePreview.ImagePreview.ScaleListener());
 
@@ -52,6 +56,7 @@ public class ImagePreview extends AppCompatActivity {
 
                 Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
                 image.setImageBitmap(bitmap);
+                progressBar.setVisibility(View.GONE);
             }
         });
 
