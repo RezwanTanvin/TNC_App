@@ -22,7 +22,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ellerlabs.tncapp.AdminScreen.CommuteData.ShowAndChooseUser;
+import com.ellerlabs.tncapp.AdminScreen.CommuteData.ChooseUser.ShowAndChooseUser;
 import com.ellerlabs.tncapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

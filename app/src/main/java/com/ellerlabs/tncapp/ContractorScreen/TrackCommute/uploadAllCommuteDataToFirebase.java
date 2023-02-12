@@ -332,8 +332,6 @@ public class uploadAllCommuteDataToFirebase extends AppCompatActivity {
         }
         cr.close();
 
-        SQLdb2.execSQL("drop table IF EXISTS  permLocationTable_1");
-
         uploadLocationTrackingDataToFirebaseDB(LocationDataObjArrayList);
 
     }

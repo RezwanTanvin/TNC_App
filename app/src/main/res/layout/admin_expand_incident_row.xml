@@ -52,8 +52,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="2dp"
                 android:orientation="horizontal"
-                android:paddingTop="8dp"
-                android:visibility="visible">
+                android:paddingTop="8dp">
 
                 <TextView
                     android:id="@+id/staticdetailsTV"
@@ -122,8 +121,7 @@
                     android:id="@+id/tripType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
+                    android:layout_weight="2"
                     android:text="TextView" />
             </LinearLayout>
 
@@ -143,8 +141,7 @@
                     android:id="@+id/vehicleType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
+                    android:layout_weight="2"
                     android:text="TextView" />
 
             </LinearLayout>
@@ -166,8 +163,7 @@
                     android:id="@+id/driveTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
+                    android:layout_weight="2"
                     android:text="TextView" />
             </LinearLayout>
 
@@ -177,27 +173,18 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView26"
+                    android:id="@+id/textView2684"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingTop="5dp"
                     android:text="Odometer @ Start :" />
 
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:background="#F44336"
-                    app:srcCompat="@android:drawable/ic_menu_camera" />
-
                 <TextView
                     android:id="@+id/odometerAtStart"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
+                    android:layout_weight="2"
                     android:text="TextView" />
 
             </LinearLayout>
@@ -218,8 +205,7 @@
                     android:id="@+id/odometerAtEnd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
+                    android:layout_weight="2"
                     android:text="TextView" />
 
             </LinearLayout>
@@ -241,20 +227,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|start"
-                    android:layout_weight="1"
-                    android:gravity="center"
+                    android:layout_weight="2"
                     android:text="TextView" />
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/odomButtonTitleLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView24"
+                    android:id="@+id/textView2478"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
@@ -268,6 +254,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/odomButtonLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"

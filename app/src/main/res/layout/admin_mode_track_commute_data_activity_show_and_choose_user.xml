@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".AdminScreen.CommuteData.ShowAndChooseUser">
+    tools:context=".AdminScreen.CommuteData.ChooseUser.ShowAndChooseUser">
 
     <TextView
         android:id="@+id/textView20121"
@@ -38,10 +38,10 @@
         android:layout_marginTop="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline13"
-        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/guideline12"
         app:layout_constraintTop_toBottomOf="@+id/textView20121"
-        app:layout_constraintVertical_bias="0.511" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline13"
@@ -60,4 +60,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView20121"
         app:srcCompat="@drawable/arrow_back_simple" />
+
+    <ProgressBar
+        android:id="@+id/showUserlistProgressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline13"
+        app:layout_constraintStart_toStartOf="@+id/guideline12"
+        app:layout_constraintTop_toTopOf="@+id/commuteUserRecyclerView" />
+
+    <TextView
+        android:id="@+id/showInternetConnTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/roundedcorner_buttons_black"
+        android:backgroundTint="#404040"
+        android:paddingLeft="14dp"
+        android:paddingTop="6dp"
+        android:paddingRight="14dp"
+        android:paddingBottom="6dp"
+        app:layout_constraintEnd_toEndOf="@+id/showUserlistProgressBar"
+        app:layout_constraintStart_toStartOf="@+id/showUserlistProgressBar"
+        app:layout_constraintTop_toBottomOf="@+id/showUserlistProgressBar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

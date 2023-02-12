@@ -1,6 +1,10 @@
-package com.ellerlabs.tncapp.AdminScreen.CommuteData.ShowUserCommInfo;
+package com.ellerlabs.tncapp.AdminScreen.CommuteData.ShowChosenUserInfo;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class EventInfoObjectForCommUser {
 
@@ -15,6 +19,8 @@ public class EventInfoObjectForCommUser {
    String odomEndByUserURI;
    String totalKMsDriven;
 
+   String totalKMsDriven_;
+
    String key;
 
    public EventInfoObjectForCommUser(ArrayList data) {
@@ -25,14 +31,19 @@ public class EventInfoObjectForCommUser {
       odomEndByUserURI = data.get(3).toString().trim();
       timeStarted = data.get(4).toString().trim();
       odomStart = data.get(5).toString().trim();
-      totalKMsDriven= data.get(6).toString().trim() + " KMs";
+
+      DecimalFormat df = new DecimalFormat("#.###");
+      totalKMsDriven = (df.format(Double.valueOf(data.get(6).toString().trim())) + " KM");
+      totalKMsDriven_ = data.get(6).toString().trim();
+
       tripType = data.get(7).toString().trim();
       vehicleType = data.get(8).toString().trim();
       key = data.get(8).toString().trim();
 
       if (!odomStart.contains("N/A"))
       {
-         odomEnd = String.valueOf(Double.valueOf(odomStart) + Double.valueOf(totalKMsDriven));
+         df = new DecimalFormat("#.###");
+         odomEnd = df.format(Double.valueOf(odomStart) + Double.valueOf(totalKMsDriven_));
 
       }
       else{
@@ -40,6 +51,10 @@ public class EventInfoObjectForCommUser {
       }
 
    }
+
+
+
+
 
 
 }

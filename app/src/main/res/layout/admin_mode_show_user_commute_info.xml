@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminScreen.CommuteData.ShowUserCommInfo.ShowUserCommuteInfo">
+    tools:context=".AdminScreen.CommuteData.ShowChosenUserInfo.ShowUserCommuteInfo">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline12s"
@@ -56,7 +56,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/textView20s"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView20s"
-        app:srcCompat="@drawable/arrow_back"
+        app:srcCompat="@drawable/arrow_back_simple"
          />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

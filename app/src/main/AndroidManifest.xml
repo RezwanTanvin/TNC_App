@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.ellerlabs.tncapp">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-feature android:name="android.hardware.camera.any" />
 
@@ -26,10 +25,14 @@
         android:theme="@style/Theme.TNCApp"
         tools:targetApi="31">
         <activity
-            android:name=".AdminScreen.CommuteData.ShowUserCommInfo.ShowUserCommuteInfo"
+            android:name=".AdminScreen.CommuteData.ImagePreview.ImagePreview"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AdminScreen.CommuteData.ShowChosenUserInfo.ShowUserCommuteInfo"
             android:exported="false" />
         <activity
-            android:name=".AdminScreen.CommuteData.ShowAndChooseUser"
+            android:name=".AdminScreen.CommuteData.ChooseUser.ShowAndChooseUser"
             android:exported="false" />
         <activity
             android:name=".AdminScreen.MainActivity_Admin"
@@ -49,13 +52,9 @@
             android:value="AIzaSyCHf4KsXXQwmymVYdVlEzvp1-wjCmpIugg" />
 
         <activity
-            android:name=".googelMapsData"
+            android:name=".AdminScreen.CommuteData.ShowMap.googelMapsData"
             android:exported="false"
             android:label="@string/title_activity_googel_maps_data" />
-        <activity
-            android:name=".ImagePreview"
-            android:exported="false"
-            android:screenOrientation="portrait" />
         <activity
             android:name=".Camera"
             android:exported="false"

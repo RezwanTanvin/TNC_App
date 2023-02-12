@@ -1,9 +1,12 @@
-package com.ellerlabs.tncapp.AdminScreen.CommuteData;
+package com.ellerlabs.tncapp.AdminScreen.CommuteData.ChooseUser;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import com.ellerlabs.tncapp.R;
@@ -19,6 +22,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -28,11 +33,17 @@ public class ShowAndChooseUser extends AppCompatActivity {
     FirebaseDatabase fdb;
     DatabaseReference fdbRef;
 
-    static ListDataAdapterForSACUser adapter;
+    static AdapterForSACUser adapter;
 
     RecyclerView rv;
 
     ImageButton backButtonCDASCU;
+
+    ProgressBar progressBar;
+
+    TextView showInternetConnTV;
+
+    ArrayList<UserDataObjForSACUser> UserNameAndEmailList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,6 +55,11 @@ public class ShowAndChooseUser extends AppCompatActivity {
         fdb = FirebaseDatabase.getInstance();
         fdbRef = fdb.getReference("Commute Data");
         backButtonCDASCU = findViewById(R.id.backButtonCDASCU);
+        progressBar = findViewById(R.id.showUserlistProgressBar);
+        showInternetConnTV = findViewById(R.id.showInternetConnTV);
+
+        showInternetConnTV.setText(checkInternetConnection(this));
+
         backButtonCDASCU.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,7 +67,7 @@ public class ShowAndChooseUser extends AppCompatActivity {
             }
         });
 
-        ArrayList<UserDataObjForSACUser> UserNameAndEmailList = new ArrayList<>();
+        UserNameAndEmailList = new ArrayList<>();
 
         fdbRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -71,7 +87,6 @@ public class ShowAndChooseUser extends AppCompatActivity {
                     if(UIDandUserNameAndEmail.indexOf("-") != -1)
                     {
 
-
                         int index = UIDandUserNameAndEmail.indexOf("-");
 
                         int index2 = UIDandUserNameAndEmail.lastIndexOf("-");
@@ -89,8 +104,13 @@ public class ShowAndChooseUser extends AppCompatActivity {
                         UserNameAndEmailList.add(obj);
                     }
                 }
-                //compareListsAndModifyAdapter(UserNameAndEmailList);
+                if (UserNameAndEmailList.stream().count()>0){
+                    progressBar.setVisibility(View.GONE);
+                    showInternetConnTV.setVisibility(View.GONE);
+
+                }
                 adapter.notifyDataSetChanged();
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -102,27 +122,67 @@ public class ShowAndChooseUser extends AppCompatActivity {
 
     }
 
+    private void makeLayoutFullScreen() {
+        View decorView = getWindow().getDecorView();
+        int uiOptions =
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        decorView.setSystemUiVisibility(uiOptions);
+    }
 
 
     @Override
     protected void onStart() {
         super.onStart();
+        makeLayoutFullScreen();
+        if (UserNameAndEmailList.stream().count()> 0 && checkInternetConnection(this) == "Internet Connected")
+        {
+            progressBar.setVisibility(View.GONE);
+            showInternetConnTV.setVisibility(View.GONE);
+        }
+        else
+        {
+            progressBar.setVisibility(View.VISIBLE);
+            showInternetConnTV.setVisibility(View.VISIBLE);
+            showInternetConnTV.setText(checkInternetConnection(this));
+        }
 
+    }
 
-        View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN|
-                        View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-        decorView.setSystemUiVisibility(uiOptions);
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+        if (UserNameAndEmailList.stream().count()> 0 && checkInternetConnection(this) == "Internet Connected")
+        {
+            progressBar.setVisibility(View.GONE);
+            showInternetConnTV.setVisibility(View.GONE);
+        }
+        else
+        {
+            progressBar.setVisibility(View.VISIBLE);
+            showInternetConnTV.setVisibility(View.VISIBLE);
+            showInternetConnTV.setText(checkInternetConnection(this));
+        }
+    }
 
+    public String checkInternetConnection(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
+        if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+            showInternetConnTV.setVisibility(View.VISIBLE);
+            return "Internet Connected";
+        } else {
+            progressBar.setVisibility(View.GONE);
+            return "No Internet Connection";
+        }
     }
 
 
 
     private void prepareRecyclerView(ArrayList<UserDataObjForSACUser> UserNameAndEmailList) {
 
-        adapter = new ListDataAdapterForSACUser(UserNameAndEmailList);
+        adapter = new AdapterForSACUser(UserNameAndEmailList,progressBar,this);
 
         rv = findViewById(R.id.commuteUserRecyclerView);
 

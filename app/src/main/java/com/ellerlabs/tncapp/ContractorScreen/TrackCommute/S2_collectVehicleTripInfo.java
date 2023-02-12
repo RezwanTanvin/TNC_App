@@ -131,6 +131,8 @@ public class S2_collectVehicleTripInfo extends AppCompatActivity {
                 truck.setBackgroundColor(Color.DKGRAY);
                 truck.setTextColor(Color.GRAY);
                 values.put("VEHICLE_TYPE","ATV");
+                values.put("STARTING_MILEAGE","N/A");
+                values.put("ODOMETER_IMAGE_URI","N/A");
                 flag1 = true;
                 enableDriveButton();
             }
@@ -146,6 +148,8 @@ public class S2_collectVehicleTripInfo extends AppCompatActivity {
                 truck.setBackgroundColor(Color.DKGRAY);
                 truck.setTextColor(Color.GRAY);
                 values.put("VEHICLE_TYPE","Snowmobile");
+                values.put("STARTING_MILEAGE","N/A");
+                values.put("ODOMETER_IMAGE_URI","N/A");
                 flag1 = true;
                 enableDriveButton();
             }

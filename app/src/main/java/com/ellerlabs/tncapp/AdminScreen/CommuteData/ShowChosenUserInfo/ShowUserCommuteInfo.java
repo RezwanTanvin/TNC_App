@@ -1,4 +1,4 @@
-package com.ellerlabs.tncapp.AdminScreen.CommuteData.ShowUserCommInfo;
+package com.ellerlabs.tncapp.AdminScreen.CommuteData.ShowChosenUserInfo;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.ellerlabs.tncapp.AdminScreen.CommuteData.ListDataAdapterForSACUser;
 import com.ellerlabs.tncapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,9 +31,11 @@ public class ShowUserCommuteInfo extends AppCompatActivity {
 
     ImageButton backButton;
 
-    ListDataAdapterForSUC adapter;
+    AdapterForSUC adapter;
 
     RecyclerView rv;
+
+    String key;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +66,7 @@ public class ShowUserCommuteInfo extends AppCompatActivity {
         super.onStart();
 
         intent = getIntent();
-        String key = intent.getStringExtra("Key");
+        key = intent.getStringExtra("Key");
 
         makeLayoutFullScreen();
 
@@ -73,22 +74,30 @@ public class ShowUserCommuteInfo extends AppCompatActivity {
         fdbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                DataArrayList.clear();
                 for (DataSnapshot data: snapshot.getChildren()){
                     ArrayList<String> obj = new ArrayList<>();
 
-                    obj.add(data.child("Odometer_Readings").child("DRIVE_TIME").getValue().toString());
-                    obj.add(data.child("Odometer_Readings").child("ODOMETER_IMAGE_URI").getValue().toString());
-                    obj.add(data.child("Odometer_Readings").child("OVERRIDE_MILEAGE").getValue().toString());
-                    obj.add(data.child("Odometer_Readings").child("OVERRIDE_MILEAGE_URI").getValue().toString());
-                    obj.add(data.child("Odometer_Readings").child("STARTED_DRIVING_AT_TIME").getValue().toString());
-                    obj.add(data.child("Odometer_Readings").child("STARTING_MILEAGE").getValue().toString());
-                    obj.add(data.child("Odometer_Readings").child("TOTAL_MILES_DRIVEN_FROM_GPS").getValue().toString());
-                    obj.add(data.child("Odometer_Readings").child("TRIP_TYPE").getValue().toString());
-                    obj.add(data.child("Odometer_Readings").child("VEHICLE_TYPE").getValue().toString());
-                    obj.add(key);
+                    boolean validData = data.child("Odometer_Readings").getChildrenCount() == 10;
 
-                    EventInfoObjectForCommUser obj_ = new EventInfoObjectForCommUser(obj);
-                    DataArrayList.add(obj_);
+                    if (validData)
+                    {
+                        obj.add(data.child("Odometer_Readings").child("DRIVE_TIME").getValue().toString());
+                        obj.add(data.child("Odometer_Readings").child("ODOMETER_IMAGE_URI").getValue().toString());
+                        obj.add(data.child("Odometer_Readings").child("OVERRIDE_MILEAGE").getValue().toString());
+                        obj.add(data.child("Odometer_Readings").child("OVERRIDE_MILEAGE_URI").getValue().toString());
+                        obj.add(data.child("Odometer_Readings").child("STARTED_DRIVING_AT_TIME").getValue().toString());
+                        obj.add(data.child("Odometer_Readings").child("STARTING_MILEAGE").getValue().toString());
+                        obj.add(data.child("Odometer_Readings").child("TOTAL_MILES_DRIVEN_FROM_GPS").getValue().toString());
+                        obj.add(data.child("Odometer_Readings").child("TRIP_TYPE").getValue().toString());
+                        obj.add(data.child("Odometer_Readings").child("VEHICLE_TYPE").getValue().toString());
+                        obj.add(key);
+
+                        EventInfoObjectForCommUser obj_ = new EventInfoObjectForCommUser(obj);
+                        DataArrayList.add(obj_);
+                    }
+
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -104,7 +113,7 @@ public class ShowUserCommuteInfo extends AppCompatActivity {
 
     private void prepareRecyclerView(ArrayList<EventInfoObjectForCommUser> DataArrayList_) {
 
-        adapter = new ListDataAdapterForSUC(DataArrayList_);
+        adapter = new AdapterForSUC(DataArrayList_,key);
 
         rv = findViewById(R.id.commUserInfoShowRV);
 
@@ -115,7 +124,7 @@ public class ShowUserCommuteInfo extends AppCompatActivity {
 
     private void makeLayoutFullScreen() {
         View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN|
+        int uiOptions =
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         decorView.setSystemUiVisibility(uiOptions);
