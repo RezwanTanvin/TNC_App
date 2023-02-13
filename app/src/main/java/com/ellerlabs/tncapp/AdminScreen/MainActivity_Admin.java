@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ellerlabs.tncapp.AdminScreen.CommuteData.ChooseUser.ShowAndChooseUser;
+import com.ellerlabs.tncapp.ContractorScreen.MainActivity;
 import com.ellerlabs.tncapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,7 +34,7 @@ public class MainActivity_Admin extends AppCompatActivity {
     ImageView trackCommuteData;
     private FirebaseAuth mAuth ;
     private FirebaseUser user;
-    TextView userName;
+    TextView userName, SwitchToContractor;
 
     Context mContext = this;
     @Override
@@ -41,12 +42,14 @@ public class MainActivity_Admin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_mode_activity_main_admin);
 
+
         trackCommuteData = findViewById(R.id.trackCommuteImage2);
         trackCommuteData.setClipToOutline(true);
         Bitmap bitmap1 = BitmapFactory.decodeResource(getResources(), R.drawable.track_commmute_logo);
         trackCommuteData.setImageBitmap(bitmap1);
 
         userName = findViewById(R.id.Hi2);
+        SwitchToContractor = findViewById(R.id.SwitchToContractor);
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
 
@@ -67,7 +70,12 @@ public class MainActivity_Admin extends AppCompatActivity {
             }, PERMISSION_REQUEST_CODE);
         };
 
-
+        SwitchToContractor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mContext, MainActivity.class));
+            }
+        });
 
     }
 

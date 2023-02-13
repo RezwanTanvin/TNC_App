@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.ellerlabs.tncapp.ImagePreview;
 import com.ellerlabs.tncapp.R;
 
 import java.util.Date;
@@ -115,7 +114,7 @@ public class S2_collectVehicleTripInfo extends AppCompatActivity {
         cameraIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(S2_collectVehicleTripInfo.this, ImagePreview.class);
+                Intent intent = new Intent(S2_collectVehicleTripInfo.this, TC_ImagePreview.class);
                 intent.putExtra("FilePath", FilePath);
                 startActivity(intent);
             }

@@ -16,8 +16,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ellerlabs.tncapp.Camera;
-import com.ellerlabs.tncapp.ImagePreview;
 import com.ellerlabs.tncapp.R;
 
 public class S3_captureOdometer extends AppCompatActivity {
@@ -141,7 +139,7 @@ public class S3_captureOdometer extends AppCompatActivity {
         thumbnail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(S3_captureOdometer.this, ImagePreview.class);
+                Intent intent = new Intent(S3_captureOdometer.this, TC_ImagePreview.class);
                 intent.putExtra("FilePath",FilePath);
                 startActivity(intent);
             }

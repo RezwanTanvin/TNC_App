@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ellerlabs.tncapp.Camera;
 import com.ellerlabs.tncapp.R;
 
 

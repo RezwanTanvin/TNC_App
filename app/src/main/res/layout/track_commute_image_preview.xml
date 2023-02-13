@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ellerlabs.tncapp.ImagePreview">
+    tools:context="com.ellerlabs.tncapp.ContractorScreen.TrackCommute.TC_ImagePreview">
 
     <ImageView
         android:id="@+id/imageView3"

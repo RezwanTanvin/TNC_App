@@ -136,5 +136,22 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.1" />
 
+    <TextView
+        android:id="@+id/SwitchToContractor"
+        android:layout_width="wrap_content"
+        android:layout_height="23dp"
+        android:text="Switch To Contractor"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/guideline19"
+        app:layout_constraintTop_toTopOf="@+id/guideline9" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

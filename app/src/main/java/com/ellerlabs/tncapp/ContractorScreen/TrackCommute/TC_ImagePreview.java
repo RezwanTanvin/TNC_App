@@ -1,4 +1,4 @@
-package com.ellerlabs.tncapp;
+package com.ellerlabs.tncapp.ContractorScreen.TrackCommute;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,8 +12,10 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.ellerlabs.tncapp.R;
 
-public class ImagePreview extends AppCompatActivity {
+
+public class TC_ImagePreview extends AppCompatActivity {
     Intent intent;
     String FilePath;
     ImageView image;
@@ -25,7 +27,7 @@ public class ImagePreview extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.image_preview);
+        setContentView(R.layout.track_commute_image_preview);
 
         image = findViewById(R.id.imageView3);
         rotateImageBtn = findViewById(R.id.rotateImageBtn3);

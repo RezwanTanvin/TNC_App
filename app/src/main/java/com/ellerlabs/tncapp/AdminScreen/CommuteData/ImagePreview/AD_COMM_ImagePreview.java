@@ -18,7 +18,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-public class ImagePreview extends AppCompatActivity {
+public class AD_COMM_ImagePreview extends AppCompatActivity {
     Intent intent;
     String URI;
     ImageView image;
@@ -41,7 +41,7 @@ public class ImagePreview extends AppCompatActivity {
         backButton = findViewById(R.id.imageButton20);
         progressBar = findViewById(R.id.imageViewProgressBar);
 
-        mScaleGestureDetector = new ScaleGestureDetector(this, new com.ellerlabs.tncapp.AdminScreen.CommuteData.ImagePreview.ImagePreview.ScaleListener());
+        mScaleGestureDetector = new ScaleGestureDetector(this, new AD_COMM_ImagePreview.ScaleListener());
 
         intent = getIntent();
         URI = intent.getStringExtra("URI");

@@ -1,4 +1,4 @@
-package com.ellerlabs.tncapp;
+package com.ellerlabs.tncapp.ContractorScreen.TrackCommute;
 
 import static android.Manifest.permission.ACCESS_BACKGROUND_LOCATION;
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
@@ -23,8 +23,7 @@ import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.ellerlabs.tncapp.ContractorScreen.TrackCommute.S3_captureOdometer;
-import com.ellerlabs.tncapp.ContractorScreen.TrackCommute.S6_collectCorrectOdometer;
+import com.ellerlabs.tncapp.R;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.io.File;
@@ -68,7 +67,7 @@ public class Camera extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_camera);
+        setContentView(R.layout.track_commute_activity_camera);
 
 
         previewView = findViewById(R.id.previewView);

@@ -3,10 +3,7 @@ package com.ellerlabs.tncapp.AdminScreen.CommuteData.ShowMap;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -29,12 +26,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class googelMapsData extends FragmentActivity implements OnMapReadyCallback {
+public class googleMapsData extends FragmentActivity implements OnMapReadyCallback {
 
     Intent intent;
     FirebaseAuth mAuth;

@@ -16,8 +16,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ellerlabs.tncapp.AdminScreen.CommuteData.ImagePreview.ImagePreview;
-import com.ellerlabs.tncapp.AdminScreen.CommuteData.ShowMap.googelMapsData;
+import com.ellerlabs.tncapp.AdminScreen.CommuteData.ImagePreview.AD_COMM_ImagePreview;
+import com.ellerlabs.tncapp.AdminScreen.CommuteData.ShowMap.googleMapsData;
 import com.ellerlabs.tncapp.R;
 
 import java.text.SimpleDateFormat;
@@ -192,7 +192,7 @@ public class AdapterForSUC extends
         openMapBtn_.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context_, googelMapsData.class);
+                Intent intent = new Intent(context_, googleMapsData.class);
                 intent.putExtra("Key",key);
                 intent.putExtra("startTime",data.timeStarted);
                 context_.startActivity(intent);
@@ -202,7 +202,7 @@ public class AdapterForSUC extends
         startingMileAgeBtn_.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context_, ImagePreview.class);
+                Intent intent = new Intent(context_, AD_COMM_ImagePreview.class);
                 intent.putExtra("URI",data.odomStartURI);
                 context_.startActivity(intent);
             }
@@ -211,7 +211,7 @@ public class AdapterForSUC extends
         endingMileBtn_.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context_, ImagePreview.class);
+                Intent intent = new Intent(context_, AD_COMM_ImagePreview.class);
                 intent.putExtra("URI",data.odomEndByUserURI);
                 context_.startActivity(intent);
             }
