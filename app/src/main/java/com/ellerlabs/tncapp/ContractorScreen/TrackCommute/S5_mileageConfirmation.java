@@ -39,7 +39,8 @@ public class S5_mileageConfirmation extends AppCompatActivity {
 
         id = intent.getIntExtra("ID",0);
         mileage = intent.getDoubleExtra("New_Mileage",0);
-        DecimalFormat df = new DecimalFormat("#.##");
+
+        DecimalFormat df = new DecimalFormat("#");
 
         showMileage = findViewById(R.id.textView13);
         yes = findViewById(R.id.yesBtn2);
@@ -51,14 +52,11 @@ public class S5_mileageConfirmation extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                 mSQLiteDatabase = S5_mileageConfirmation.this.openOrCreateDatabase("TrackCommuteInfo", Context.MODE_PRIVATE, null);
+                mSQLiteDatabase = S5_mileageConfirmation.this.openOrCreateDatabase("TrackCommuteInfo", Context.MODE_PRIVATE, null);
 
                 values = new ContentValues();
                 values.put("OVERRIDE_MILEAGE",  "N/A");
                 values.put("OVERRIDE_MILEAGE_URI","N/A  : GPS Calculated Data Correctly");
-
-
-                values.put("SQL_TABLE_NAME", "permLocationTable_1");
 
                 mSQLiteDatabase.update("TrackCommuteInfo",values,"ID = ?",new String[]{String.valueOf(id)});
 

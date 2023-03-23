@@ -18,12 +18,17 @@ import android.widget.Toast;
 
 import com.ellerlabs.tncapp.ContractorScreen.MainActivity;
 import com.ellerlabs.tncapp.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -43,7 +48,6 @@ public class uploadAllCommuteDataToFirebase extends AppCompatActivity {
     SQLiteDatabase SQLdb1,SQLdb2;
 
     TrackCommuteDataObj newObj;
-    String imageStorageRef = "";
 
     ProgressBar progressBar1,progressBar2,progressBar3,progressBar4;
     Button mainMenuBtn,retryBtn;
@@ -51,6 +55,8 @@ public class uploadAllCommuteDataToFirebase extends AppCompatActivity {
 
     TextView tryCatchResultTextBox1, tryCatchResultTextBox2, tryCatchResultTextBox3, tryCatchResultTextBox4;
     boolean uploadTrackingSuccessFlag, uploadLocationDataSuccessFlag, connectionToFirebaseSuccessFlag, downloadFromSQL;
+
+    int rowID;
 
 //TODO: Perhaps this entire class needs to be turned into a foreground activity class.
 
@@ -75,6 +81,8 @@ public class uploadAllCommuteDataToFirebase extends AppCompatActivity {
         mainMenuBtn = findViewById(R.id.mainMenuBtn);
         retryBtn = findViewById((R.id.retryBtn));
 
+        Intent intent = getIntent();
+        rowID = intent.getIntExtra("ID",1);
 
 
 
@@ -86,7 +94,7 @@ public class uploadAllCommuteDataToFirebase extends AppCompatActivity {
         getEmailAndAmendIt();
         tryEstablishingConnectionToFirebase();
         loadDataFromLocalStorage();
-        checkifuploadToFirebaseWasSuccessful();
+        checkIfUploadToFirebaseWasSuccessful();
 
         mainMenuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,30 +109,14 @@ public class uploadAllCommuteDataToFirebase extends AppCompatActivity {
                 getEmailAndAmendIt();
                 tryEstablishingConnectionToFirebase();
                 loadDataFromLocalStorage();
-                checkifuploadToFirebaseWasSuccessful();
+                checkIfUploadToFirebaseWasSuccessful();
             }
         });
 
     }
 
-    private void checkifuploadToFirebaseWasSuccessful() {
-        try {
 
-            if (uploadTrackingSuccessFlag && uploadLocationDataSuccessFlag && connectionToFirebaseSuccessFlag && downloadFromSQL){
-                Drawable drawable = ContextCompat.getDrawable(uploadAllCommuteDataToFirebase.this, R.drawable.check_mark);
-                progressBar4.setForeground(drawable);
-                tryCatchResultTextBox4.setText("Upload was successful. Please use the button below to go to the main menu.");
-                mainMenuBtn.setVisibility(View.VISIBLE);
-            }
-        }catch(Exception e){
-            Drawable drawable = ContextCompat.getDrawable(uploadAllCommuteDataToFirebase.this, R.drawable.failed_x_sign);
-            progressBar4.setForeground(drawable);
-            retryBtn.setVisibility(View.VISIBLE);
-            tryCatchResultTextBox4.setText("Error: " + e);
-        }
-    }
-
-    // We are doing this so that we can store this as a firebast file path. Cannot use "." in file path but email contains this.
+    // We are doing this so that we can store this as a firebase file path. Cannot use "." in file path but email contains this.
     private void getEmailAndAmendIt() {
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
@@ -139,30 +131,44 @@ public class uploadAllCommuteDataToFirebase extends AppCompatActivity {
     }
 
     private void tryEstablishingConnectionToFirebase() {
-        try {
-            database = FirebaseDatabase.getInstance();
-            firebasedb = database.getReference("Commute Data");
-            storage = FirebaseStorage.getInstance();
-            storageRef = storage.getReference();
 
-            connectionToFirebaseSuccessFlag = true;
+        database = FirebaseDatabase.getInstance();
+        firebasedb = database.getReference("Commute Data");
+        storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReference();
 
-            Drawable drawable = ContextCompat.getDrawable(uploadAllCommuteDataToFirebase.this, R.drawable.check_mark);
-            progressBar1.setForeground(drawable);
-            tryCatchResultTextBox1.setText("Establish Connection to Firebase : Task was successful.");
-        }
-        catch(Exception e){
-            Drawable drawable = ContextCompat.getDrawable(uploadAllCommuteDataToFirebase.this, R.drawable.failed_x_sign);
-            progressBar1.setForeground(drawable);
-            retryBtn.setVisibility(View.VISIBLE);
-            tryCatchResultTextBox1.setText("Error: " + e);
-        }
+        database.getReference("Commute Data").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+
+                if (!task.isSuccessful()) {
+                    tryCatchResultTextBox1.setText("Establish Connection to Server : Task was successful.");
+                    Drawable drawable = ContextCompat.getDrawable(uploadAllCommuteDataToFirebase.this, R.drawable.check_mark);
+                    progressBar1.setForeground(drawable);
+                    connectionToFirebaseSuccessFlag = true;
+                }
+                else{
+                    tryCatchResultTextBox1.setText("Unable to connect to Server.");
+                    Drawable drawable = ContextCompat.getDrawable(uploadAllCommuteDataToFirebase.this, R.drawable.failed_x_sign);
+                    progressBar1.setForeground(drawable);
+                    retryBtn.setVisibility(View.VISIBLE);
+                    connectionToFirebaseSuccessFlag = false;
+                }
+            }
+
+
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                tryCatchResultTextBox1.setText("Unable to connect to Server : " + e.getMessage());
+                Drawable drawable = ContextCompat.getDrawable(uploadAllCommuteDataToFirebase.this, R.drawable.failed_x_sign);
+                progressBar1.setForeground(drawable);
+                retryBtn.setVisibility(View.VISIBLE);
+                connectionToFirebaseSuccessFlag = false;
+            }
+        });
     }
 
-
-
-
-    
     void loadDataFromLocalStorage(){
         try {
             downloadCommuteDataFromSQLDatabase();
@@ -233,7 +239,7 @@ public class uploadAllCommuteDataToFirebase extends AppCompatActivity {
         //We will store the entire table data into our custom built object arrayList.
         ArrayList<TrackCommuteDataObj> TrackCommuteDataObjArrayList = new ArrayList<>();
 
-        Cursor cr = SQLdb1.rawQuery("SELECT * FROM TrackCommuteInfo",null);
+        Cursor cr = SQLdb1.rawQuery("SELECT * FROM TrackCommuteInfo WHERE ID = " + rowID ,null);
         if(cr.moveToFirst()) {
             do {
                 ArrayList<String> row = new ArrayList<>();
@@ -250,11 +256,11 @@ public class uploadAllCommuteDataToFirebase extends AppCompatActivity {
         }
         cr.close();
 
-        uploadCommuteDatatoFirebaseDB(TrackCommuteDataObjArrayList);
+        uploadCommuteDataToFirebaseDB(TrackCommuteDataObjArrayList);
 
     }
 
-    void uploadCommuteDatatoFirebaseDB(ArrayList<TrackCommuteDataObj> TrackCommuteDataObjArrayList){
+    void uploadCommuteDataToFirebaseDB(ArrayList<TrackCommuteDataObj> TrackCommuteDataObjArrayList){
 
         newObj = TrackCommuteDataObjArrayList.get(0);
 
@@ -297,7 +303,7 @@ public class uploadAllCommuteDataToFirebase extends AppCompatActivity {
             uploadTrackingSuccessFlag = true;
             Drawable drawable = ContextCompat.getDrawable(uploadAllCommuteDataToFirebase.this, R.drawable.check_mark);
             progressBar4.setForeground(drawable);
-            tryCatchResultTextBox4.setText("Upload Trip Info : Task successful.");
+            tryCatchResultTextBox4.setText("Queue Trip Info for Upload : Task successful.");
             
         }
         catch (Exception e){
@@ -316,7 +322,7 @@ public class uploadAllCommuteDataToFirebase extends AppCompatActivity {
         //We will store the entire table data into our custom built object arrayList.
         ArrayList<LocationDataObj> LocationDataObjArrayList = new ArrayList<>();
 
-        Cursor cr = SQLdb2.rawQuery("SELECT * FROM permLocationTable_1",null);
+        Cursor cr = SQLdb2.rawQuery("SELECT * FROM permLocationTable_" + rowID,null);
         if(cr.moveToFirst()) {
             do {
                 ArrayList<String> row = new ArrayList<>();
@@ -356,14 +362,28 @@ public class uploadAllCommuteDataToFirebase extends AppCompatActivity {
 
             Drawable drawable = ContextCompat.getDrawable(uploadAllCommuteDataToFirebase.this, R.drawable.check_mark);
             progressBar4.setForeground(drawable);
-            tryCatchResultTextBox4.setText("Upload GPS Coordinates : Task successful.");
+            tryCatchResultTextBox3.setText("Queue GPS Coordinates for Upload : Task successful.");
 
 
         }
         catch(Exception e){
             progressBar4.setVisibility(View.INVISIBLE);
-                tryCatchResultTextBox4.setText("Failed to upload. \n\nError Message: " + e);
+                tryCatchResultTextBox3.setText("Failed to upload. \n\nError Message: " + e);
         }
+
+    }
+
+    private void checkIfUploadToFirebaseWasSuccessful() {
+
+        if (uploadTrackingSuccessFlag && uploadLocationDataSuccessFlag && connectionToFirebaseSuccessFlag && downloadFromSQL)
+        {
+            Drawable drawable = ContextCompat.getDrawable(uploadAllCommuteDataToFirebase.this, R.drawable.check_mark);
+            progressBar4.setForeground(drawable);
+            tryCatchResultTextBox4.setText("Upload was successful. Please use the button below to go to the main menu.");
+            mainMenuBtn.setVisibility(View.VISIBLE);
+            retryBtn.setVisibility(View.GONE);
+        }
+
 
     }
 

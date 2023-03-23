@@ -32,7 +32,7 @@ public class S3_captureOdometer extends AppCompatActivity {
    TextView header;
    String Mileage;
 
-   ImageButton zooomIntoThumbNailButton,retryTakePictureButton,rotateImageBtn;
+   ImageButton zoomIntoThumbNailButton,retryTakePictureButton,rotateImageBtn;
     //private static final int CAMERA_REQUEST = 1888;
 
     @Override
@@ -48,7 +48,7 @@ public class S3_captureOdometer extends AppCompatActivity {
         submitBtn.setEnabled(false);
         takePic.setEnabled(false);
         header = findViewById(R.id.header);
-        zooomIntoThumbNailButton = findViewById(R.id.zooomIntoThumbNailButton);
+        zoomIntoThumbNailButton = findViewById(R.id.zooomIntoThumbNailButton);
         retryTakePictureButton = findViewById(R.id.imageButton3);
         Mileage = "";
         rotateImageBtn = findViewById(R.id.rotateImageBtn);
@@ -80,7 +80,7 @@ public class S3_captureOdometer extends AppCompatActivity {
             thumbnail.setVisibility(View.VISIBLE);
             Bitmap bitmap = BitmapFactory.decodeFile(FilePath);
             thumbnail.setEnabled(true);
-            zooomIntoThumbNailButton.setVisibility(View.VISIBLE);
+            zoomIntoThumbNailButton.setVisibility(View.VISIBLE);
             retryTakePictureButton.setVisibility(View.VISIBLE);
             rotateImageBtn.setVisibility(View.VISIBLE);
             thumbnail.setImageBitmap(bitmap);
@@ -145,7 +145,7 @@ public class S3_captureOdometer extends AppCompatActivity {
             }
         });
 
-        zooomIntoThumbNailButton.setOnClickListener(new View.OnClickListener() {
+        zoomIntoThumbNailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 thumbnail.performClick();

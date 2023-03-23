@@ -162,16 +162,17 @@ public class S4_timeAndDistanceTravelled extends AppCompatActivity {
 
         mSQLiteDatabase = this.openOrCreateDatabase("location_db", Context.MODE_PRIVATE, null);
 
-       // Need to figure out a way to make sure we are creating TrackCommute ID specific table for locations in case more than one record is created.
-        mSQLiteDatabase.execSQL("drop table IF EXISTS  permLocationTable_1");
+        String permanentLocationTableName = "permLocationTable_" + rowID ;
 
-        mSQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS permLocationTable_1  (" +
+        mSQLiteDatabase.execSQL("drop table IF EXISTS " + permanentLocationTableName);
+
+        mSQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS " + permanentLocationTableName + "  (" +
                 "latitude DOUBLE, " +
                 "longitude DOUBLE, " +
                 "gpsStrength DOUBLE)");
 
 
-        mSQLiteDatabase.execSQL("INSERT INTO permLocationTable_1 "+
+        mSQLiteDatabase.execSQL("INSERT INTO " + permanentLocationTableName + " "+
                 "SELECT * " +
                 "FROM locations");
         }

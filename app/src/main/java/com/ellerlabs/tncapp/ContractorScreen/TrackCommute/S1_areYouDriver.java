@@ -22,9 +22,6 @@ public class S1_areYouDriver extends AppCompatActivity {
 
         db = openOrCreateDatabase("TrackCommuteInfo",MODE_PRIVATE,null);
 
-
-        db.execSQL("DROP TABLE IF EXISTS TrackCommuteInfo");
-
         db.execSQL("CREATE TABLE IF NOT EXISTS TrackCommuteInfo (" +
                 "ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT ," +
                 "VEHICLE_TYPE varchar(32)," +

@@ -148,8 +148,9 @@ public class S6_collectCorrectOdometer extends AppCompatActivity {
                    db.update("TrackCommuteInfo",values,"ID = ?",new String[]{String.valueOf(rowID)});
 
                 Toast.makeText(S6_collectCorrectOdometer.this, "Saved successfully. Thank you for logging your commute.", Toast.LENGTH_SHORT).show();
-
-                startActivity(new Intent(S6_collectCorrectOdometer.this, uploadAllCommuteDataToFirebase.class));
+                Intent newIntent = new Intent(S6_collectCorrectOdometer.this, uploadAllCommuteDataToFirebase.class);
+                newIntent.putExtra("ID",rowID);
+                startActivity(newIntent);
 
                }
                catch(Exception e)
