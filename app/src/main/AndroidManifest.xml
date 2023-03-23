@@ -25,6 +25,9 @@
         android:theme="@style/Theme.TNCApp"
         tools:targetApi="31">
         <activity
+            android:name=".S1_preHarvest"
+            android:exported="false" />
+        <activity
             android:name=".AdminScreen.CommuteData.ImagePreview.AD_COMM_ImagePreview"
             android:exported="false"
             android:screenOrientation="portrait" />
