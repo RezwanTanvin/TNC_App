@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ContractorScreen.HarvestProduct.PreHarvest.S1_preHarvest">
+    tools:context=".ContractorScreen.HarvestProduct.S1_preHarvest">
 
     <TextView
         android:id="@+id/textView19"
@@ -22,6 +22,7 @@
         android:id="@+id/noBtn3"
         android:layout_width="108dp"
         android:layout_height="50dp"
+        android:layout_marginTop="16dp"
         android:onClick="goToMainScreen"
         android:text="No"
         app:layout_constraintEnd_toEndOf="@+id/textView3"
@@ -29,11 +30,11 @@
         app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
     <Button
-        android:id="@+id/yesBtn3"
-        android:layout_width="0dp"
+        android:id="@+id/s1_preharvest_yesBtn"
+        android:layout_width="108dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
-        android:onClick="startTrackCommuteS2"
+        android:onClick="goToS2"
         android:text="Yes"
         app:layout_constraintEnd_toEndOf="@+id/textView19"
         app:layout_constraintStart_toStartOf="@+id/textView3"

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ContractorScreen.HarvestProduct.S3_preHarvest_SafetyCheckAndEscapePlan">
+
+    <TextView
+        android:id="@+id/textView79"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="If electronics fail, do you know what direction you would have to head towards using your COMPASS to get back to safety?"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="@+id/textView78"
+        app:layout_constraintTop_toBottomOf="@+id/textView78" />
+
+    <TextView
+        android:id="@+id/textView78"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Have all maps been reviewed ?"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="@+id/textView76"
+        app:layout_constraintTop_toBottomOf="@+id/textView76" />
+
+    <TextView
+        android:id="@+id/textView65"
+        android:layout_width="335dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="Please confirm the following tasks have been completed ?"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView64" />
+
+    <TextView
+        android:id="@+id/textView64"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Safety Check and Inspection"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline22" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.14" />
+
+    <TextView
+        android:id="@+id/title13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Pre Harvest"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView69"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="Electronic Equipment Check"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="@+id/textView65"
+        app:layout_constraintTop_toBottomOf="@+id/textView65" />
+
+    <TextView
+        android:id="@+id/textView75"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Radio/GPS devices and phones (with maps downloaded) fully charged?"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="@+id/textView69"
+        app:layout_constraintTop_toBottomOf="@+id/textView69" />
+
+    <TextView
+        android:id="@+id/textView76"
+        android:layout_width="260dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="16dp"
+        android:text="Has an escape plan (meet-up time, where keys to truck are hidden) been communicated between all harvesters?"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="@+id/textView75"
+        app:layout_constraintTop_toBottomOf="@+id/textView75" />
+
+    <CheckBox
+        android:id="@+id/checkBox29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView69"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView69" />
+
+    <CheckBox
+        android:id="@+id/checkBox31"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/textView75"
+        app:layout_constraintEnd_toEndOf="@+id/checkBox29"
+        app:layout_constraintTop_toTopOf="@+id/textView75" />
+
+    <CheckBox
+        android:id="@+id/checkBox33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/textView76"
+        app:layout_constraintEnd_toEndOf="@+id/checkBox31"
+        app:layout_constraintTop_toTopOf="@+id/textView76" />
+
+    <CheckBox
+        android:id="@+id/checkBox34"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/textView78"
+        app:layout_constraintEnd_toEndOf="@+id/checkBox33"
+        app:layout_constraintTop_toTopOf="@+id/textView78" />
+
+    <CheckBox
+        android:id="@+id/checkBox35"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/textView79"
+        app:layout_constraintEnd_toEndOf="@+id/checkBox34"
+        app:layout_constraintTop_toTopOf="@+id/textView79" />
+
+    <Button
+        android:id="@+id/startTrackerBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:text="Start Tracker"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/checkBox35"
+        app:layout_constraintStart_toEndOf="@+id/textView79"
+        app:layout_constraintTop_toBottomOf="@+id/textView79"
+        app:layout_constraintVertical_bias="0.69" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

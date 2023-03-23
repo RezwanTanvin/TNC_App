@@ -26,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ellerlabs.tncapp.ContractorScreen.HarvestProduct.S3_preHarvest_SafetyCheckAndEscapePlan;
 import com.ellerlabs.tncapp.R;
 import com.ellerlabs.tncapp.ContractorScreen.TrackCommute.S1_areYouDriver;
 import com.google.firebase.auth.FirebaseAuth;
@@ -115,5 +116,12 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         Toast.makeText(this, "Please avoid pressing the back button, this will corrupt the data collected.", Toast.LENGTH_LONG).show();
     }
+
+    public void goToS1PreHarvest(View view) {
+
+        startActivity(new Intent(this, com.ellerlabs.tncapp.ContractorScreen.HarvestProduct.S1_preHarvest.class));
+    }
+
+
 
 }

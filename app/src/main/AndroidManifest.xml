@@ -25,6 +25,12 @@
         android:theme="@style/Theme.TNCApp"
         tools:targetApi="31">
         <activity
+            android:name=".S3_preHarvest_SafetyCheckAndEscapePlan"
+            android:exported="false" />
+        <activity
+            android:name=".S2_preHarvest_SafetyCheckAndInspection"
+            android:exported="false" />
+        <activity
             android:name=".S1_preHarvest"
             android:exported="false" />
         <activity
